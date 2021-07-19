@@ -1,0 +1,2 @@
+D:\DirectXSamples\OgreArchitecture\Debug\OgreArchitecture.exe
+D:\DirectXSamples\OgreArchitecture\Debug\OgreArchitecture.pdb

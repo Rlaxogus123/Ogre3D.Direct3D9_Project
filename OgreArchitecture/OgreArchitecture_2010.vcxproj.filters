@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns:atg="http://atg.xbox.com" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="0Default">
+      <UniqueIdentifier>{5a89ca70-eeee-4a57-abd4-6c3b167dd40f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0Default\Resource Files">
+      <UniqueIdentifier>{8e114980-c1a3-4ada-ad7c-83caadf5daeb}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="0Default\Shaders">
+      <UniqueIdentifier>{2c3d4c8c-5d1a-459a-a05a-a4e4b608a44e}</UniqueIdentifier>
+      <Extensions>fx;fxh;hlsl</Extensions>
+    </Filter>
+    <Filter Include="0Default\DXUT">
+      <UniqueIdentifier>{a43c5c25-0e86-4a20-b64a-883785ff74fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine">
+      <UniqueIdentifier>{5c82a658-d392-4904-ac60-2846657ffb8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\0Base">
+      <UniqueIdentifier>{d284bec6-6ba8-475c-b7a0-ddf349dc214a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager">
+      <UniqueIdentifier>{4eda4162-9bcc-43ca-9229-fb82245edbf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\3SceneNode">
+      <UniqueIdentifier>{081b4b80-4eca-49de-ad99-0f5798cce520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4MovableObject">
+      <UniqueIdentifier>{2ad125f0-77ec-48c1-a2b4-842903971071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4MovableObject\0Camera">
+      <UniqueIdentifier>{da56355e-48ea-45b5-bb88-01b5e0ea0157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\MyMath">
+      <UniqueIdentifier>{ecec156e-b253-4db8-9493-ee22c57ed25b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\0Root">
+      <UniqueIdentifier>{755dd647-577e-4170-a491-b597da6c9336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\1SceneManager">
+      <UniqueIdentifier>{a3a720a8-881c-4596-bac6-ed395e691575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\2Singleton">
+      <UniqueIdentifier>{1f3c2045-7c3a-47ac-8679-62c5dfc69f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\2Node">
+      <UniqueIdentifier>{7f05ad00-4b46-4470-b751-58dbb18a7e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game">
+      <UniqueIdentifier>{197d7241-ff44-428a-9856-7977ded03394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game\0Scene">
+      <UniqueIdentifier>{b79fc297-b721-4035-a3d0-d2bb4ef2e544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game\0Scene\TestScene">
+      <UniqueIdentifier>{f27eb9b5-6952-443b-baa0-f1c89db15ea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4MovableObject\2Entity">
+      <UniqueIdentifier>{475ec6c8-072c-4361-bf0c-330d45febf30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4MovableObject\1Light">
+      <UniqueIdentifier>{1f1a830d-6b71-4b79-8ed3-0f887d68bca5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DXUT\Optional\directx.ico">
+      <Filter>0Default\Resource Files</Filter>
+    </None>
+    <ClInclude Include="DXUT\Core\DXUT.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Core\DXUTenum.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Core\DXUTmisc.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClCompile Include="DXUT\Core\DXUT.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Core\DXUTenum.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Core\DXUTmisc.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+    <ClInclude Include="DXUT\Optional\DXUTcamera.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\DXUTgui.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\DXUTres.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\DXUTsettingsdlg.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\SDKmesh.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\SDKmisc.h">
+      <Filter>0Default\DXUT</Filter>
+    </ClInclude>
+    <ClCompile Include="DXUT\Optional\DXUTcamera.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\DXUTgui.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\DXUTres.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\DXUTsettingsdlg.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\SDKmesh.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\SDKmisc.cpp">
+      <Filter>0Default\DXUT</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="OgreArchitecture.cpp">
+      <Filter>0Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp">
+      <Filter>1Engine\0Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>1Engine\1Manager\1SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>1Engine\1Manager\2Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNode.cpp">
+      <Filter>1Engine\3SceneNode</Filter>
+    </ClCompile>
+    <ClCompile Include="MovableObject.cpp">
+      <Filter>1Engine\4MovableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>1Engine\2Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>1Engine\4MovableObject\0Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMath.cpp">
+      <Filter>1Engine\MyMath</Filter>
+    </ClCompile>
+    <ClCompile Include="Root.cpp">
+      <Filter>1Engine\1Manager\0Root</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>2Game\0Scene\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>1Engine\4MovableObject\2Entity</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CLInclude Include="resource.h">
+      <Filter>0Default\Resource Files</Filter>
+    </CLInclude>
+    <ResourceCompile Include="OgreArchitecture.rc">
+      <Filter>0Default\Resource Files</Filter>
+    </ResourceCompile>
+    <ClInclude Include="Base.h">
+      <Filter>1Engine\0Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>1Engine\1Manager\1SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>1Engine\1Manager\2Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNode.h">
+      <Filter>1Engine\3SceneNode</Filter>
+    </ClInclude>
+    <ClInclude Include="MovableObject.h">
+      <Filter>1Engine\4MovableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>1Engine\2Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>1Engine\4MovableObject\0Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMath.h">
+      <Filter>1Engine\MyMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Root.h">
+      <Filter>1Engine\1Manager\0Root</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>2Game\0Scene\TestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>1Engine\4MovableObject\2Entity</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
