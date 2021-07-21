@@ -384,6 +384,20 @@ int Safe_Release(T& t)
     return refCount;
 }
 
+struct PLANEVERTEX {
+    FLOAT x,y,z; // 정점의 x,y,z 좌표
+    FLOAT nx,ny,nz; // 정점의 수직 좌표
+    FLOAT u1,v1 ; // 정점의 텍스쳐 좌표
+};
+#define D3DFVF_PLANEVERTEX (D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1)
+// D3DFVF_TEX0은 텍스쳐가 없다는 것을 말한다.
+// 따라서 텍스쳐가 있는 버텍스를 사용해야할 경우 TEX1부터 시작한다고 생각하면 된다.
+
+struct MYINDEX {
+    WORD _0, _1, _2; // WORD, 16비트 인덱스
+};
+
+
 #endif
 
 

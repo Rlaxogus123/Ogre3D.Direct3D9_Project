@@ -24,8 +24,6 @@ void Light::Render(void)
 
 	DXUTGetD3D9Device()->SetLight(1, &light);
 	DXUTGetD3D9Device()->LightEnable(1, TRUE);
-
-	DXUTGetD3D9Device()->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 void Light::setType(const LightType _type)

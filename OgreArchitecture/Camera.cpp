@@ -42,7 +42,6 @@ void Camera::Render(void)
 	matBill._31 = matView._31;
 	matBill._33 = matView._33;
 
-	DXUTGetD3D9Device()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	DXUTGetD3D9Device()->SetTransform(D3DTS_VIEW, &matView);
 }
 

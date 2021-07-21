@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Camera.h"
 #include "Light.h"
+#include "MeshManager.h"
 
 NAMESPACE(Tipp7)
 
@@ -19,6 +20,7 @@ public:
 
 	string sceneName = "";
 	bool isActive = false;
+	bool isWireFrame = false;
 
 	SceneNode* createChildSceneNode(const string _childName);
 	SceneNode* getSceneNode(const string _childName);
@@ -30,6 +32,7 @@ public:
 	Camera* getCamera(const string _movableName);
 
 	Entity* createEntity(const string _movableName, const wstring _xfilePath);
+	Entity* createEntity(const string _movableName, const string _planeName);
 	Entity* getEntity(const string _movableName);
 
 	Light* createLight(const string _movableName);

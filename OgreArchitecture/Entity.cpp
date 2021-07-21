@@ -58,16 +58,13 @@ HRESULT Entity::SetXFile(wstring _xfilePath)
 void Entity::Render(void)
 {
 	DXUTGetD3D9Device()->SetTransform(D3DTS_WORLD, &node->GetMatrix());
-	if (Mesh != NULL)
+	for (DWORD i = 0; i < numMaterials; i++)
 	{
-		for (DWORD i = 0; i < numMaterials; i++)
-		{
-			DXUTGetD3D9Device()->SetMaterial(&MeshMaterials[i]);
-			DXUTGetD3D9Device()->SetTexture(0,MeshTextures[i]);
-			Mesh->DrawSubset(i);
-		}
-		DXUTGetD3D9Device()->SetTexture(0, NULL);
+		if(MeshMaterials != NULL) DXUTGetD3D9Device()->SetMaterial(&MeshMaterials[i]);
+		if(MeshTextures != NULL) DXUTGetD3D9Device()->SetTexture(0, MeshTextures[i]);
+		if(Mesh != NULL) Mesh->DrawSubset(i);
 	}
+	DXUTGetD3D9Device()->SetTexture(0, NULL);
 }
 
 void Entity::Exit(void)

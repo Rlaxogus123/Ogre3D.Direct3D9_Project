@@ -45,6 +45,7 @@ SceneManager* Root::getSceneManager(const string _sceneName)
 
 void Root::RootInit(void)
 {
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	cout << "Root Initialized" << endl;
 }
 

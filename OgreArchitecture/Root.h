@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneManager.h"
 #include "Singleton.h"
+#include "MeshManager.h"
 
 NAMESPACE(Tipp7)
 

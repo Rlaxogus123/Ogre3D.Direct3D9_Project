@@ -63,6 +63,12 @@
     <Filter Include="1Engine\4MovableObject\2Light">
       <UniqueIdentifier>{1f1a830d-6b71-4b79-8ed3-0f887d68bca5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1Engine\1Manager\3MeshManager">
+      <UniqueIdentifier>{127185da-91d2-4664-b15d-28bb3ad2c205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\3MeshManager\0Plane">
+      <UniqueIdentifier>{4f197b24-7baa-4283-9099-fecf153b8112}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -163,6 +169,12 @@
     <ClCompile Include="Light.cpp">
       <Filter>1Engine\4MovableObject\2Light</Filter>
     </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>1Engine\1Manager\3MeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>1Engine\1Manager\3MeshManager\0Plane</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -206,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>1Engine\4MovableObject\2Light</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshManager.h">
+      <Filter>1Engine\1Manager\3MeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>1Engine\1Manager\3MeshManager\0Plane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ SceneNode* SceneManager::createChildSceneNode(const string _childName)
 		if (it->nodeName._Equal(_childName))
 		{
 			cout << "This SceneNode name is Already added : " << _childName << endl;
-			scnNode->nodeName = _childName + "_copy";
+			scnNode->nodeName = it->nodeName + "_copy";
 			break;
 		}
 	}
@@ -37,7 +37,7 @@ MovableObject* SceneManager::createMovableObject(const string _movableName)
 		if (it->movableName._Equal(_movableName))
 		{
 			cout << "This MovableObject name is Already added : " << _movableName << endl;
-			movable->movableName = _movableName + "_copy";
+			movable->movableName = it->movableName + "_copy";
 			break;
 		}
 	}
@@ -61,7 +61,7 @@ Camera* SceneManager::createCamera(const string _movableName)
 		if (it->movableName._Equal(_movableName))
 		{
 			cout << "This Camera name is Already added : " << _movableName << endl;
-			movable->movableName = _movableName + "_copy";
+			movable->movableName = it->movableName + "_copy";
 			break;
 		}
 	}
@@ -85,12 +85,31 @@ Entity* SceneManager::createEntity(const string _movableName, const wstring _xfi
 		if (it->movableName._Equal(_movableName))
 		{
 			cout << "This Entity name is Already added : " << _movableName << endl;
-			movable->movableName = _movableName + "_copy";
+			movable->movableName = it->movableName + "_copy";
 			break;
 		}
 	}
 	movableList.push_back(movable);
 	movable->SetXFile(_xfilePath);
+	return movable;
+}
+
+Entity* SceneManager::createEntity(const string _movableName, const string _planeName)
+{
+	Entity* movable = new Entity();
+	movable->movableName = _movableName;
+	for (auto& it : movableList)
+	{
+		if (it->movableName._Equal(_movableName))
+		{
+			cout << "This Entity name is Already added : " << _movableName << endl;
+			movable->movableName = it->movableName + "_copy";
+			break;
+		}
+	}
+	movableList.push_back(movable);
+	movable->Mesh = MeshManager::GetInstance()->GetMesh(_planeName);
+	movable->numMaterials = 1;
 	return movable;
 }
 
@@ -111,7 +130,7 @@ Light* SceneManager::createLight(const string _movableName)
 		if (it->movableName._Equal(_movableName))
 		{
 			cout << "This Light name is Already added : " << _movableName << endl;
-			movable->movableName = _movableName + "_copy";
+			movable->movableName = it->movableName + "_copy";
 			break;
 		}
 	}
@@ -166,6 +185,7 @@ void SceneManager::Render(void)
 {
 	DXUTGetD3D9Device()->SetRenderState(D3DRS_LIGHTING, TRUE);
 	DXUTGetD3D9Device()->SetRenderState(D3DRS_AMBIENT, ambient);
+	DXUTGetD3D9Device()->SetRenderState(D3DRS_FILLMODE, isWireFrame ? D3D10_FILL_WIREFRAME : D3DFILL_SOLID);
 
 	for (auto& it : nodelist)
 	{
