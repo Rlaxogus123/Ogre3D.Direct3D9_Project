@@ -8,7 +8,10 @@
 #include "MyMath.h"
 #include "Root.h"
 
+
 USING(Tipp7)
+
+SceneManager* scnMgr;
 
 //--------------------------------------------------------------------------------------
 // Rejects any D3D9 devices that aren't acceptable to the app by returning false
@@ -42,7 +45,43 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
 {
-    Root::GetInstance()->RootInit();
+    Tipp7::Root::GetInstance()->RootInit();
+
+    scnMgr = Tipp7::Root::GetInstance()->createSceneManager("TestScene");
+    scnMgr->setAmbientLight(0.2,0.2,0.2);
+    
+    Tipp7::SceneNode* n_camera = scnMgr->createChildSceneNode("MainCamera");
+    Tipp7::SceneNode* n_airship = scnMgr->createChildSceneNode("model0");
+    Tipp7::SceneNode* n_teapot = scnMgr->createChildSceneNode("model1");
+    Tipp7::SceneNode* n_teapot2 = n_teapot->createChildSceneNode("child_model2");
+    Tipp7::SceneNode* n_pLight = scnMgr->createChildSceneNode("light");
+
+    Tipp7::Camera* cam = scnMgr->createCamera("myCam");
+    n_camera->setPosition(0, 0, -100);
+    n_camera->attachObject(cam);
+
+    Tipp7::Entity* entity = scnMgr->createEntity("myEntity", L"Models/Airship.x");
+    n_airship->attachObject(entity);
+    n_airship->setPosition(0, -10, 0);
+
+    Tipp7::Entity* entity2 = scnMgr->createEntity("myEntity", L"Models/teapot.x");
+    n_teapot->attachObject(entity2);
+    n_teapot->setPosition(10, 1, 1);
+    n_teapot->setScale(2, 2, 2);
+
+    Tipp7::Entity* entity3 = scnMgr->createEntity("myEntity", L"Models/teapot.x");
+    n_teapot2->attachObject(entity3);
+    n_teapot2->setPosition(15, 1, 1);
+    n_teapot2->setScale(3, 2, 2);
+
+    Tipp7::Light* dirLight = scnMgr->createLight("myLight");
+    dirLight->setType(LightType::POINT);
+    dirLight->setPowerScale(50);
+    dirLight->setDiffuseColor(1, 1, 1);
+    n_pLight->attachObject(dirLight);
+    n_pLight->setPosition(0, 0, 0);
+    n_pLight->pitch(-90);
+    
     return S_OK;
 }
 
@@ -64,6 +103,19 @@ HRESULT CALLBACK OnD3D9ResetDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFA
 void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext )
 {
     Root::GetInstance()->RootUpdate();
+
+    SceneNode* node = scnMgr->getSceneNode("MainCamera");
+    SceneNode* parent = scnMgr->getSceneNode("model1");
+
+    parent->roll(parent->rotation.z + 1);
+
+    if (DXUTIsKeyDown('W')) node->setPosition(node->getPosition().x, node->getPosition().y, node->getPosition().z + 1);
+    if (DXUTIsKeyDown('S')) node->setPosition(node->getPosition().x, node->getPosition().y, node->getPosition().z - 1);
+    if (DXUTIsKeyDown('A')) node->setPosition(node->getPosition().x - 1, node->getPosition().y, node->getPosition().z);
+    if (DXUTIsKeyDown('D')) node->setPosition(node->getPosition().x + 1, node->getPosition().y, node->getPosition().z);
+
+    if (DXUTIsKeyDown(VK_SPACE)) node->setPosition(node->getPosition().x, node->getPosition().y + 1, node->getPosition().z);
+    if (DXUTIsKeyDown(VK_SHIFT)) node->setPosition(node->getPosition().x, node->getPosition().y - 1, node->getPosition().z);
 }
 
 
@@ -75,7 +127,7 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
     HRESULT hr;
 
     // Clear the render target and the zbuffer 
-    V( pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 0, 45, 50, 170 ), 1.0f, 0 ) );
+    V( pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 0, 0, 0, 0 ), 1.0f, 0 ) );
 
     // Render the scene
     if( SUCCEEDED( pd3dDevice->BeginScene() ) )
@@ -142,14 +194,8 @@ int main(void)
     DXUTSetHotkeyHandling( true, true, true );  // handle the default hotkeys
     DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
     DXUTCreateWindow( L"OgreArchitecture" );
-    DXUTCreateDevice( true, 640, 480 );
-
-    SceneManager* scnMgr = Root::GetInstance()->createSceneManager("TestScene");
-    SceneNode* node = scnMgr->createChildSceneNode("TestChild");
-    SceneNode* node2 = node->createChildSceneNode("TestChild2");
-
-    Camera* obj = scnMgr->createCamera("myCam");
-    node2->attachObject(obj);
+    DXUTCreateDevice( true, SCW, SCH );
+        
     // Start the render loop
     DXUTMainLoop();
 

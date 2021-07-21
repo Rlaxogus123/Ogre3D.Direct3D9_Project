@@ -12,6 +12,7 @@ void SceneNode::attachObject(MovableObject* _obj)
     }
     cout << "Attach Success! : " << _obj->movableName << endl;
     _obj->node = (Node*)this;
+    _obj->Init();
     movablegroup.push_back(_obj);
 }
 

@@ -57,10 +57,10 @@
     <Filter Include="2Game\0Scene\TestScene">
       <UniqueIdentifier>{f27eb9b5-6952-443b-baa0-f1c89db15ea5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\4MovableObject\2Entity">
+    <Filter Include="1Engine\4MovableObject\1Entity">
       <UniqueIdentifier>{475ec6c8-072c-4361-bf0c-330d45febf30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1Engine\4MovableObject\1Light">
+    <Filter Include="1Engine\4MovableObject\2Light">
       <UniqueIdentifier>{1f1a830d-6b71-4b79-8ed3-0f887d68bca5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -158,7 +158,10 @@
       <Filter>2Game\0Scene\TestScene</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>1Engine\4MovableObject\2Entity</Filter>
+      <Filter>1Engine\4MovableObject\1Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>1Engine\4MovableObject\2Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,7 +202,10 @@
       <Filter>2Game\0Scene\TestScene</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>1Engine\4MovableObject\2Entity</Filter>
+      <Filter>1Engine\4MovableObject\1Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>1Engine\4MovableObject\2Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

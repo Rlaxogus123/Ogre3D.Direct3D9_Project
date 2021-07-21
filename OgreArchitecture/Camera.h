@@ -14,7 +14,7 @@ public:
 	Vector3 vUp; // 카메라의 상방벡터
 	Vector3 vView;// 카메라가 향하는 단위방향벡터	
 	Vector3 vCross; // 카메라의 측면벡터cross ( view,up )
-	Vector3 vLookat = { 0,0,-1 }; // 카메라가 바라보는 방향
+	Vector3 vLookat; // 카메라가 바라보는 방향
 
 	D3DXMATRIX matView; // 카메라 행렬
 	D3DXMATRIX matBill; // 빌보드 행렬 ( 역행렬 )

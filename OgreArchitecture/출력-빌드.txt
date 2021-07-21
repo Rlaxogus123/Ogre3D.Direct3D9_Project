@@ -1,0 +1,5 @@
+﻿빌드 시작...
+1>------ 빌드 시작: 프로젝트: OgreArchitecture, 구성: Debug Win32 ------
+1>OgreArchitecture.cpp
+1>OgreArchitecture_2010.vcxproj -> D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\Debug\OgreArchitecture.exe
+========== 빌드: 성공 1, 실패 0, 최신 0, 생략 0 ==========

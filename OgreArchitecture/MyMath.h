@@ -11,7 +11,7 @@ Vector2 myD3DXVec2Normalize(Vector2* pOut, const Vector2* p1);
 Vector3 myD3DXVec3Normalize(Vector3* pOut, const Vector3* p1);
 FLOAT myD3DXVec2Dot(const Vector2* p1, const Vector2* p2);
 FLOAT myD3DXVec3Dot(const Vector3* p1, const Vector3* p2);
-Vector3 myD3DXVec3Cross(Vector3* pOut, const Vector3 p1, const Vector3 p2);
+Vector3 myD3DXVec3Cross(Vector3* pOut, const Vector3* p1, const Vector3* p2);
 
 VOID myD3DXMatrixShow(const D3DXMATRIX* pOut);
 D3DXMATRIX myD3DXMatrixIdentity(D3DXMATRIX* pOut);

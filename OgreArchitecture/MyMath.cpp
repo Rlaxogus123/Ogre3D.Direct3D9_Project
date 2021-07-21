@@ -2,7 +2,7 @@
 #include "MyMath.h"
 
 //式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式//
-//	The owner of this library is 'Tipp7'
+//	The Maker of this library is 'Tipp7'
 //
 //  Contact
 //    Ⅱ Email : acekimcp@gmail.com
@@ -66,11 +66,11 @@ FLOAT myD3DXVec3Dot(const Vector3* p1, const Vector3* p2)
 	return p1->x * p2->x + p1->y * p2->y + p1->z * p2->z;
 }
 
-Vector3 myD3DXVec3Cross(Vector3* pOut, const Vector3 p1, const Vector3 p2)
+Vector3 myD3DXVec3Cross(Vector3* pOut, const Vector3* p1, const Vector3* p2)
 {
-	pOut->x = (p1.y * p2.z) - (p2.y * p1.z);
-	pOut->y = (p1.z * p2.x) - (p2.z * p1.x);
-	pOut->z = (p1.x * p2.y) - (p2.x * p1.y);
+	pOut->x = (p1->y * p2->z) - (p2->y * p1->z);
+	pOut->y = (p1->z * p2->x) - (p2->z * p1->x);
+	pOut->z = (p1->x * p2->y) - (p2->x * p1->y);
 	return *pOut;
 }
 
