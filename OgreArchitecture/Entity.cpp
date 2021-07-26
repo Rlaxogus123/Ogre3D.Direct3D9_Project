@@ -1,11 +1,11 @@
 #include "DXUT.h"
 #include "Entity.h"
+#include "Root.h"
 
 USING(Tipp7)
 
 void Entity::Init(void)
 {
-
 }
 
 void Entity::Update(void)
@@ -28,12 +28,12 @@ HRESULT Entity::SetXFile(wstring _xfilePath)
 
 	D3DXMATERIAL* d3dxMaterials = (D3DXMATERIAL*)pD3DXMtrlBuffer->GetBufferPointer();
 	MeshMaterials = new D3DMATERIAL9[numMaterials];
-	MeshTextures = new LPDIRECT3DTEXTURE9[numMaterials];
+	MeshTextures = new Texture2D[numMaterials];
 	for (DWORD i = 0; i < numMaterials; i++)
 	{
 		MeshMaterials[i] = d3dxMaterials[i].MatD3D;
 		MeshMaterials[i].Ambient = MeshMaterials[i].Diffuse;
-		MeshTextures[i] = NULL;
+		MeshTextures[i].texture = NULL;
 
 		if (d3dxMaterials[i].pTextureFilename != NULL && strlen(d3dxMaterials[i].pTextureFilename) > 0)
 		{
@@ -41,39 +41,104 @@ HRESULT Entity::SetXFile(wstring _xfilePath)
 			CHAR finalroute[MAX_PATH];
 			sprintf(finalroute, "%s%s", route, d3dxMaterials[i].pTextureFilename);
 
-			auto isFail = D3DXCreateTextureFromFileA(DXUTGetD3D9Device(), finalroute, &MeshTextures[i]);
+			auto isFail = D3DXCreateTextureFromFileA(DXUTGetD3D9Device(), finalroute, &MeshTextures[i].texture);
 			if (FAILED(isFail))
 			{
-				MeshTextures[i] = NULL;
+				MeshTextures[i].texture = NULL;
 				wcout << "TextureFail!! << " << finalroute << endl;
 			}
 			else
+			{
 				wcout << "TextureLoad!! << " << finalroute << endl;
+			}
 		}
 	}
 	pD3DXMtrlBuffer->Release();
 	return 0;
 }
 
+void Entity::SetTexture(Texture2D* texture, const int _number)
+{
+	if (texture == nullptr) return;
+	MeshTextures = nullptr;
+	MeshTextures = new Texture2D[_number + 1];
+	MeshTextures[_number].info = texture->info;
+	MeshTextures[_number].texture = texture->texture;
+}
+
+void Entity::SetEffect(Shader* _shader)
+{
+	shader = _shader;
+}
+
 void Entity::Render(void)
 {
 	DXUTGetD3D9Device()->SetTransform(D3DTS_WORLD, &node->GetMatrix());
-	for (DWORD i = 0; i < numMaterials; i++)
+
+	if (shader != nullptr)
 	{
-		if(MeshMaterials != NULL) DXUTGetD3D9Device()->SetMaterial(&MeshMaterials[i]);
-		if(MeshTextures != NULL) DXUTGetD3D9Device()->SetTexture(0, MeshTextures[i]);
-		if(Mesh != NULL) Mesh->DrawSubset(i);
+		UINT numPasses = 0;
+
+		shader->Render(node->GetMatrix());
+
+		D3DXMATRIX matView;
+		D3DXMATRIX camWorld;
+		Vector3 camPos = { 1,1,1 };
+
+		D3DLIGHT9 light;
+
+		DEVICE->GetTransform(D3DTS_VIEW, &matView);
+		DEVICE->GetLight(1, &light);
+
+		D3DXVECTOR4 lightposition = { light.Position.x, light.Position.y, light.Position.z, 1 };
+		D3DXVECTOR4 ambient = { 0.1f,0.1f,0.1f, 1 };
+
+		D3DXMatrixInverse(&camWorld, NULL, &matView);
+		D3DXVec3TransformCoord(&camPos, &camPos, &camWorld);
+		shader->effect->SetVector((D3DXHANDLE)"gWorldCameraPosition", &(D3DXVECTOR4)camPos);
+		shader->effect->SetVector((D3DXHANDLE)"gWorldLightPosition", &lightposition);
+		shader->effect->SetVector((D3DXHANDLE)"AmbientPower", &ambient);
+		shader->effect->SetFloat((D3DXHANDLE)"gLightPower", 60.0f);
+
+		shader->effect->Begin(&numPasses, NULL);
+		for (UINT j = 0; j < numPasses; ++j)
+		{
+			shader->effect->BeginPass(j);
+			for (DWORD i = 0; i < numMaterials; i++)
+			{
+				if (MeshMaterials != NULL)
+					DXUTGetD3D9Device()->SetMaterial(&MeshMaterials[i]);
+				DXUTGetD3D9Device()->SetTexture(0, MeshTextures[i].texture);
+				Mesh->DrawSubset(i);
+			}
+			DXUTGetD3D9Device()->SetTexture(0, NULL);
+			shader->effect->EndPass();
+		}
+		shader->effect->End();
 	}
-	DXUTGetD3D9Device()->SetTexture(0, NULL);
+	else
+	{
+		for (DWORD i = 0; i < numMaterials; i++)
+		{
+			if (MeshMaterials != NULL)
+				DXUTGetD3D9Device()->SetMaterial(&MeshMaterials[i]);
+			DXUTGetD3D9Device()->SetTexture(0, MeshTextures[i].texture);
+			Mesh->DrawSubset(i);
+		}
+		DXUTGetD3D9Device()->SetTexture(0, NULL);
+	}
 }
 
 void Entity::Exit(void)
 {
-	Safe_Release(Mesh);
-	for (int i = 0; i < numMaterials; i++)
+	cout << "!! Entity Released !! : " << movableName << endl;
+	SAFE_DELETE_ARRAY(MeshMaterials);
+	if (MeshTextures)
 	{
-		delete& MeshMaterials[i];
-		Safe_Release(MeshTextures[i]);
+		for (int i = 0; i < numMaterials; i++)
+		{
+			SAFE_RELEASE(MeshTextures[i].texture);
+		}
+		SAFE_DELETE_ARRAY(MeshTextures);
 	}
-	SAFE_DELETE_ARRAY(MeshTextures);
 }

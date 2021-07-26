@@ -26,6 +26,27 @@ SceneManager* Root::createSceneManager(const string _sceneName)
 	return scnMgr;
 }
 
+SceneManager* Root::createSceneManager(const string _sceneName, SceneManager* app)
+{
+	app->sceneName = _sceneName;
+	for (auto& it : sceneList)
+	{
+		if (it->sceneName == _sceneName)
+		{
+			cout << _sceneName << " is Already added!";
+			return app;
+		}
+	}
+	sceneList.push_back(app);
+	if (curScene == nullptr)
+	{
+		cout << "[ Scene Selected : " << app->sceneName << " ]" << endl;
+		curScene = app;
+		curScene->Init();
+	}
+	return app;
+}
+
 SceneManager* Root::getSceneManager(const string _sceneName)
 {
 	if (curScene != nullptr) curScene->Exit();
@@ -41,6 +62,23 @@ SceneManager* Root::getSceneManager(const string _sceneName)
 	}
 	cout << "Could not Find Scene!" << endl;
 	return nullptr;
+}
+
+void Root::ReloadSceneManager(const string _sceneName)
+{
+	for (auto& it : sceneList)
+	{
+		if (it->sceneName._Equal(_sceneName))
+		{
+			cout << "[ Success To SceneChange! ] : " << it->sceneName << endl;
+			curScene->Exit();
+			MeshManager::GetInstance()->Exit();
+			curScene = it;
+			curScene->Init();
+			return;
+		}
+	}
+	cout << "Could not Find Scene of : " << _sceneName << endl;
 }
 
 void Root::RootInit(void)
@@ -68,5 +106,6 @@ void Root::RootExit(void)
 		delete it;
 	}
 	sceneList.clear();
+	RM::GetInstance()->Exit();
 	exit(0);
 }

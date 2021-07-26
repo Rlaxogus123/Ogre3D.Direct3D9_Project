@@ -109,6 +109,7 @@ Entity* SceneManager::createEntity(const string _movableName, const string _plan
 	}
 	movableList.push_back(movable);
 	movable->Mesh = MeshManager::GetInstance()->GetMesh(_planeName);
+	printf("%p", movable->Mesh);
 	movable->numMaterials = 1;
 	return movable;
 }
@@ -149,6 +150,13 @@ Light* SceneManager::getLight(const string _movableName)
 void SceneManager::setAmbientLight(const float _r, const float _g, const float _b)
 {
 	//wtf code
+	D3DLIGHT9 light;
+	DEVICE->GetLight(1, &light);
+	
+	light.Ambient.r = _r;
+	light.Ambient.g = _g;
+	light.Ambient.b = _b;
+
 	int nr = _r * 255;
 	int ng = _g * 255;
 	int nb = _b * 255;
@@ -196,4 +204,20 @@ void SceneManager::Render(void)
 
 void SceneManager::Exit(void)
 {
+	cout << "!! SceneManager Released !! : " << sceneName << endl;
+
+	for (auto& i : nodelist)
+	{
+		i->Exit();
+		delete i;
+	}
+	for (auto& i : movableList)
+	{
+		i->Exit();
+		delete i;
+	}
+	nodelist.clear();
+	movableList.clear();
+	camList.clear();
+	lightList.clear();
 }

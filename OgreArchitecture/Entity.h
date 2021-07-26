@@ -1,6 +1,8 @@
 #pragma once
 
 #include "MovableObject.h"
+#include "Texture2D.h"
+#include "Shader.h"
 
 NAMESPACE(Tipp7)
 
@@ -11,12 +13,15 @@ public:
 	explicit Entity(void) {};
 	virtual ~Entity(void) {};
 
-	LPD3DXMESH Mesh = NULL; // 메쉬 객체
+	Shader* shader = nullptr;
+	ID3DXMesh* Mesh = NULL; // 메쉬 객체
 	D3DMATERIAL9* MeshMaterials = NULL; // 메쉬 재질
-	LPDIRECT3DTEXTURE9* MeshTextures = NULL; // 메쉬 텍스쳐
+	Texture2D* MeshTextures = NULL; // 메쉬 텍스쳐
 	DWORD numMaterials = NULL; // 재질의 수
 
 	HRESULT SetXFile(wstring _xfilePath);
+	void SetTexture(Texture2D* texture, const int _number = 0);
+	void SetEffect(Shader* _shader);
 
 	void Init(void) override;
 	void Update(void) override;

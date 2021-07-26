@@ -23,7 +23,7 @@ public:
 	void Init(void);
 	void Update(void) override;
 	void Render(void) override;
-	void Exit(void);
+	void Exit(void) override;
 };
 
 END

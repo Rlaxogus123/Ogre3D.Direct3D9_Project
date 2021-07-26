@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "Camera.h"
 #include "MyMath.h"
+#include "Root.h"
 
 USING(MyMath)
 USING(Tipp7)
@@ -47,4 +48,5 @@ void Camera::Render(void)
 
 void Camera::Exit(void)
 {
+	cout << "!! Camera Released !! : " << movableName << endl;
 }

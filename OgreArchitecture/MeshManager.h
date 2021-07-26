@@ -14,15 +14,12 @@ public:
 
 	list<Plane*> planeList;
 
-	HRESULT createPlane(const string _planeName, Plane& plane,
-		const int _width, const int _height, const int Xsegments, const int Zsegments);
-
-	LPD3DXMESH Mesh = NULL;
-
-	int xseg;
-	int zseg;
+	HRESULT createPlane(const string _planeName,
+		const int _width, const int _height, const int Xsegments, const int Zsegments,
+		const float uTile = 1, const float vTile = 1);
 
 	void Render();
+	void Exit();
 
 	LPD3DXMESH GetMesh(string _planeName);
 };

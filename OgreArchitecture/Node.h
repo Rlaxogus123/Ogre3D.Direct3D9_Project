@@ -23,7 +23,13 @@ public:
 	constexpr bool activeSelf() { return isActive; };
 
 	void setDirection(const Vector3 _dir);
+
+	void setTranslate(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f);
+	void setTranslate(const Vector3 _vec);
+
 	void setPosition(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f);
+	void setPosition(const Vector3 _vec);
+
 	void setScale(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f);
 	void yaw(const float amount);
 	void pitch(const float amount);
@@ -35,6 +41,7 @@ public:
 
 	virtual void Update(void);
 	virtual void Render(void);
+	virtual void Exit(void);
 };
 
 END

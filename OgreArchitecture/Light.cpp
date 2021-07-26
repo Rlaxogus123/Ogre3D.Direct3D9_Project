@@ -57,5 +57,6 @@ void Light::setSpecularColor(const float r, const float g, const float b)
 
 void Light::Exit(void)
 {
+	cout << "!! Light Released !! : " << movableName << endl;
 }
 

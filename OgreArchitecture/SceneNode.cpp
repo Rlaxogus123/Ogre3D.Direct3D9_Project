@@ -103,4 +103,12 @@ void SceneNode::Render(void)
 
 void SceneNode::Exit(void)
 {
+    cout << "!! SceneNode Released !! : " << nodeName << endl;
+    for (auto& it : childgroup)
+    {
+        it->Exit();
+        delete it;
+    }
+    childgroup.clear();
+    movablegroup.clear();
 }

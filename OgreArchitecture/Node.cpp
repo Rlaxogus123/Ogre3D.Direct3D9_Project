@@ -8,11 +8,28 @@ void Node::setDirection(const Vector3 _dir)
 
 }
 
+void Node::setTranslate(const float x, const float y, const float z)
+{
+	position.x += x;
+	position.y += y;
+	position.z += z;
+}
+
+void Node::setTranslate(const Vector3 _vec)
+{
+	position += _vec;
+}
+
 void Node::setPosition(const float x, const float y, const float z)
 {
 	position.x = x;
 	position.y = y;
 	position.z = z;
+}
+
+void Node::setPosition(const Vector3 _vec)
+{
+	position = _vec;
 }
 
 void Node::setScale(const float x, const float y, const float z)
@@ -88,4 +105,8 @@ void Node::Render(void)
 		if (it->activeSelf())
 			it->Render();
 	}
+}
+
+void Node::Exit(void)
+{
 }

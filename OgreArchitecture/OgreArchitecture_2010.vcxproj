@@ -393,11 +393,15 @@
     <ClCompile Include="MyMath.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="RM.cpp" />
     <ClCompile Include="Root.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneNode.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Singleton.cpp" />
-    <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="TestApp.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Light.h" />
@@ -406,11 +410,15 @@
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Resources.h" />
+    <ClInclude Include="RM.h" />
     <ClInclude Include="Root.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneNode.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Singleton.h" />
-    <ClInclude Include="TestScene.h" />
+    <ClInclude Include="TestApp.h" />
+    <ClInclude Include="Texture2D.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="DXUT\Core\DXUT.h" />
@@ -439,12 +447,8 @@
     <ClCompile Include="OgreArchitecture.cpp" />
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
     <CLInclude Include="resource.h" />
     <ResourceCompile Include="OgreArchitecture.rc" />
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

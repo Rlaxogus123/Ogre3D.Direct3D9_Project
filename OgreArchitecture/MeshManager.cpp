@@ -3,14 +3,16 @@
 
 USING(Tipp7)
 
-HRESULT MeshManager::createPlane(const string _planeName, Plane& plane, const int _width, const int _height, const int Xsegments, const int Zsegments)
+HRESULT MeshManager::createPlane(const string _planeName, const int _width, const int _height, const int Xsegments, const int Zsegments, const float uTile, const float vTile)
 {
-	if (FAILED(D3DXCreateMeshFVF(((Xsegments-1) * (Zsegments-1)) * 2, Xsegments * Zsegments, D3DXMESH_MANAGED, D3DFVF_PLANEVERTEX, DEVICE, &Mesh)))
+	Plane* plane = new Plane();
+
+	if (FAILED(D3DXCreateMeshFVF((((Xsegments-1) * (Zsegments-1)) * 2), (Xsegments * Zsegments), D3DXMESH_MANAGED, D3DFVF_PLANEVERTEX, DEVICE, &plane->Mesh)))
 		return E_FAIL;
 
 	//Lock() 함수를 통해 정점버퍼에 정점을 저장할수 있는 주소값을 직접 얻어온다.
 	VOID* pVBbuffer = NULL;
-	if (FAILED(Mesh->LockVertexBuffer(NULL, (void**)&pVBbuffer)))
+	if (FAILED(plane->Mesh->LockVertexBuffer(NULL, (void**)&pVBbuffer)))
 		return E_FAIL;
 	
 	// 정점의 좌표값을 할당하는 간단한 알고리즘
@@ -33,8 +35,8 @@ HRESULT MeshManager::createPlane(const string _planeName, Plane& plane, const in
 			v.nz =  0;
 
 			//텍스쳐 맵핑을 위한 uv좌표 설정
-			v.u1 = (float)x / (Xsegments - 1);
-			v.v1 = (float)z / (Zsegments - 1);
+			v.u1 = (float)x / (Xsegments - 1) * uTile;
+			v.v1 = (float)z / (Zsegments - 1) * vTile;
 
 			// 이렇게 만들어진 하나의 정점 정보를 정점 버퍼에 저장한다.
 			// ( 이미 Lock을 통해서 실제로 저장되야할 주소는 받아온 상태 )
@@ -45,10 +47,10 @@ HRESULT MeshManager::createPlane(const string _planeName, Plane& plane, const in
 			// 포인터를 다음 정점 위치로 가리킨다.
 		}
 	}
-	Mesh->UnlockVertexBuffer();
+	plane->Mesh->UnlockVertexBuffer();
 
 	VOID* pIBbuffer = NULL;
-	if (FAILED(Mesh->LockIndexBuffer(NULL, (void**)&pIBbuffer)))
+	if (FAILED(plane->Mesh->LockIndexBuffer(NULL, (void**)&pIBbuffer)))
 		return E_FAIL;
 
 	MYINDEX i;
@@ -77,15 +79,25 @@ HRESULT MeshManager::createPlane(const string _planeName, Plane& plane, const in
 			*pI++ = i;
 		}
 	}
-	Mesh->UnlockIndexBuffer();
 
-	plane.planeName = _planeName;
-	plane.Mesh = Mesh;
-	planeList.push_back(&plane);
+	plane->Mesh->UnlockIndexBuffer();
+	plane->planeName = _planeName;
+	planeList.push_back(plane);
 }
 
 void MeshManager::Render()
 {
+}
+
+void MeshManager::Exit()
+{
+	cout << "!! MeshManager - Plane Released !!" << endl;
+	for (auto& it : planeList)
+	{
+		it->Exit();
+		SAFE_DELETE(it);
+	}
+	planeList.clear();
 }
 
 LPD3DXMESH MeshManager::GetMesh(string _planeName)
@@ -93,7 +105,7 @@ LPD3DXMESH MeshManager::GetMesh(string _planeName)
 	for (auto& it : planeList)
 	{
 		if (it->planeName._Equal(_planeName))
-			return it->Mesh;
+			return it->Clone()->Mesh;
 	}
 	return nullptr;
 }

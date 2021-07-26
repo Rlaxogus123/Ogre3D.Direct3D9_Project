@@ -54,9 +54,6 @@
     <Filter Include="2Game\0Scene">
       <UniqueIdentifier>{b79fc297-b721-4035-a3d0-d2bb4ef2e544}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Game\0Scene\TestScene">
-      <UniqueIdentifier>{f27eb9b5-6952-443b-baa0-f1c89db15ea5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1Engine\4MovableObject\1Entity">
       <UniqueIdentifier>{475ec6c8-072c-4361-bf0c-330d45febf30}</UniqueIdentifier>
     </Filter>
@@ -68,6 +65,21 @@
     </Filter>
     <Filter Include="1Engine\1Manager\3MeshManager\0Plane">
       <UniqueIdentifier>{4f197b24-7baa-4283-9099-fecf153b8112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\4ResourceManager">
+      <UniqueIdentifier>{167d992b-e7e6-42d1-a1cc-b5ee1e155e97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game\0Scene\0TestApp">
+      <UniqueIdentifier>{f27eb9b5-6952-443b-baa0-f1c89db15ea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\4ResourceManager\0Resources">
+      <UniqueIdentifier>{dd99e7e6-c522-43fa-a780-3ca784f46e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\4ResourceManager\0Resources\1Shader">
+      <UniqueIdentifier>{6bfca1c1-d671-431b-a020-665e7a50b225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\4ResourceManager\0Resources\0Texture2D">
+      <UniqueIdentifier>{2233e77b-4c21-4d3e-8383-c24f89567649}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -160,9 +172,6 @@
     <ClCompile Include="Root.cpp">
       <Filter>1Engine\1Manager\0Root</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>2Game\0Scene\TestScene</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>1Engine\4MovableObject\1Entity</Filter>
     </ClCompile>
@@ -174,6 +183,21 @@
     </ClCompile>
     <ClCompile Include="Plane.cpp">
       <Filter>1Engine\1Manager\3MeshManager\0Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="RM.cpp">
+      <Filter>1Engine\1Manager\4ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>1Engine\1Manager\4ResourceManager\0Resources\0Texture2D</Filter>
+    </ClCompile>
+    <ClCompile Include="TestApp.cpp">
+      <Filter>2Game\0Scene\0TestApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>1Engine\1Manager\4ResourceManager\0Resources\1Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>1Engine\1Manager\4ResourceManager\0Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -210,9 +234,6 @@
     <ClInclude Include="Root.h">
       <Filter>1Engine\1Manager\0Root</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>2Game\0Scene\TestScene</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>1Engine\4MovableObject\1Entity</Filter>
     </ClInclude>
@@ -225,7 +246,20 @@
     <ClInclude Include="Plane.h">
       <Filter>1Engine\1Manager\3MeshManager\0Plane</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="RM.h">
+      <Filter>1Engine\1Manager\4ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>1Engine\1Manager\4ResourceManager\0Resources\0Texture2D</Filter>
+    </ClInclude>
+    <ClInclude Include="TestApp.h">
+      <Filter>2Game\0Scene\0TestApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>1Engine\1Manager\4ResourceManager\0Resources\1Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>1Engine\1Manager\4ResourceManager\0Resources</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
