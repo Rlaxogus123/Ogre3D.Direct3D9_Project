@@ -28,12 +28,15 @@ void Camera::Update(void)
 
 void Camera::Render(void)
 {
-	vLookat = { 0, 0, 1 };
+	vLookat = { 0,0,1 };
+	Vector3 pos = {0,0,0};
 	D3DXVec3TransformCoord(&vLookat, &vLookat, &node->GetMatrix());
-	D3DXVec3Normalize(&vView, &(vLookat - node->position));
+	D3DXVec3TransformCoord(&pos, &pos, &node->GetMatrix());
+
+	D3DXVec3Normalize(&vView, &(vLookat - pos));
 	D3DXVec3Cross(&vCross, &vUp, &vView);
 	
-	D3DXMatrixLookAtLH(&matView, &node->position, &vLookat, &vUp);
+	D3DXMatrixLookAtLH(&matView, &pos, &vLookat, &vUp);
 	D3DXMatrixInverse(&matBill, NULL, &matView);
 	matBill._41 = 0;
 	matBill._42 = 0;

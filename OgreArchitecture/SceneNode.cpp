@@ -1,7 +1,19 @@
 #include "DXUT.h"
 #include "SceneNode.h"
+#include "Root.h"
 
 USING(Tipp7)
+
+void SceneNode::setBoundCircle(FLOAT radius)
+{
+    boundCircle = radius;
+    D3DXCreateSphere(DEVICE, radius, 30, 30, &CircleMesh, NULL);
+}
+
+void SceneNode::showBoundCircle(bool show)
+{
+    isCircle = show;
+}
 
 void SceneNode::attachObject(MovableObject* _obj)
 {
@@ -98,6 +110,16 @@ void SceneNode::Render(void)
     {
         if (it->activeSelf())
             it->Render();
+    }
+    if (isCircle)
+    {
+        DEVICE->SetTransform(D3DTS_WORLD, &GetMatrix());
+        DEVICE->SetRenderState(D3DRS_FILLMODE, D3D10_FILL_WIREFRAME);
+        DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+        if (CircleMesh != NULL)
+            CircleMesh->DrawSubset(0);
+        if(!Root::GetInstance()->curScene->isWireFrame) DEVICE->SetRenderState(D3DRS_FILLMODE, D3D10_FILL_SOLID);
+        DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
     }
 }
 

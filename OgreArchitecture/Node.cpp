@@ -72,10 +72,32 @@ D3DXMATRIX& Node::GetMatrix() const
 	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
 
 	// 이동 -> 회전 -> 변환
-	if(parent != nullptr)
+	if (parent != nullptr)
 		return (mScale * mEulerAngle * mTranslate) * parent->GetMatrix();
 	return mScale * mEulerAngle * mTranslate;
 }
+
+D3DXMATRIX& Node::GetPureMatrix() const
+{
+	D3DXMATRIX mTranslate;
+	D3DXMatrixTranslation(&mTranslate, position.x, position.y, position.z);
+
+	D3DXMATRIX mRotX;
+	D3DXMATRIX mRotY;
+	D3DXMATRIX mRotZ;
+	D3DXMatrixRotationX(&mRotX, D3DXToRadian(rotation.x));
+	D3DXMatrixRotationY(&mRotY, D3DXToRadian(rotation.y));
+	D3DXMatrixRotationZ(&mRotZ, D3DXToRadian(rotation.z));
+
+	D3DXMATRIX mEulerAngle = mRotZ * mRotX * mRotY;
+
+	D3DXMATRIX mScale;
+	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
+
+	// 이동 -> 회전 -> 변환
+	return mScale * mEulerAngle * mTranslate;
+}
+
 D3DXMATRIX& Node::GetEulerMatrix() const
 {
 	D3DXMATRIX mRotX;
@@ -89,8 +111,16 @@ D3DXMATRIX& Node::GetEulerMatrix() const
 		return (mRotZ * mRotX * mRotY) * parent->GetEulerMatrix();
 	return mRotZ * mRotX * mRotY;
 }
+
 void Node::Update(void)
 {
+	foward = { 0,0,1 };
+	up = { 0,1,0 };
+	right = { 1,0,0 };
+	D3DXVec3TransformCoord(&foward, &foward, &GetEulerMatrix());
+	D3DXVec3TransformCoord(&up, &up, &GetEulerMatrix());
+	D3DXVec3TransformCoord(&right, &right, &GetEulerMatrix());
+
 	for (auto& it : childgroup)
 	{
 		if (it->activeSelf())

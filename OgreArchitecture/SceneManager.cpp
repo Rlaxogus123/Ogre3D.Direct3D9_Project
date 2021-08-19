@@ -135,6 +135,7 @@ Light* SceneManager::createLight(const string _movableName)
 			break;
 		}
 	}
+	movable->lightNumber = movableList.size();
 	movableList.push_back(movable);
 	return movable;
 }

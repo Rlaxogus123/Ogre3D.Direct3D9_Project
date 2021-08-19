@@ -1,0 +1,12 @@
+﻿  GameApp.cpp
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(104,34): warning C4838: 'DWORD'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(104,53): warning C4838: 'DWORD'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(110,26): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(111,29): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(116,26): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(117,29): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(122,26): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(123,29): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(131,26): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\GameApp.cpp(132,29): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  OgreArchitecture_2010.vcxproj -> D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\Debug\OgreArchitecture.exe

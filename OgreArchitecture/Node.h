@@ -17,6 +17,7 @@ public:
 	Vector3 rotation = { 0,0,0 };
 
 	D3DXMATRIX& GetMatrix() const;
+	D3DXMATRIX& GetPureMatrix() const;
 	D3DXMATRIX& GetEulerMatrix() const;
 
 	bool isActive = true;
@@ -35,9 +36,15 @@ public:
 	void pitch(const float amount);
 	void roll(const float amount);
 
-	Vector3 getPosition() { return position; }
-	Vector3 getScale()    { return scale; }
-	Vector3 getRotation() { return rotation; }
+	Vector3 getPosition(void) { return position; }
+	Vector3 getScale(void) { return scale; }
+	Vector3 getRotation(void) { return rotation; }
+	Vector3 getFoward(void) { return foward; };
+	Vector3 getUp(void) { return up; };
+	Vector3 getRight(void) { return right; };
+	Vector3 foward;
+	Vector3 up;
+	Vector3 right;
 
 	virtual void Update(void);
 	virtual void Render(void);

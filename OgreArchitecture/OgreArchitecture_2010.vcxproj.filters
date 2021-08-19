@@ -81,6 +81,12 @@
     <Filter Include="1Engine\1Manager\4ResourceManager\0Resources\0Texture2D">
       <UniqueIdentifier>{2233e77b-4c21-4d3e-8383-c24f89567649}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Game\0Scene\GameApp">
+      <UniqueIdentifier>{1a49bc08-60a5-43a2-bb47-fc065f081118}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\5CollisionManager">
+      <UniqueIdentifier>{861f4e4c-77f6-4f4a-b930-b6c197f6f1c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -199,6 +205,12 @@
     <ClCompile Include="Resources.cpp">
       <Filter>1Engine\1Manager\4ResourceManager\0Resources</Filter>
     </ClCompile>
+    <ClCompile Include="GameApp.cpp">
+      <Filter>2Game\0Scene\GameApp</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>1Engine\1Manager\5CollisionManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -260,6 +272,12 @@
     </ClInclude>
     <ClInclude Include="Resources.h">
       <Filter>1Engine\1Manager\4ResourceManager\0Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameApp.h">
+      <Filter>2Game\0Scene\GameApp</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>1Engine\1Manager\5CollisionManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

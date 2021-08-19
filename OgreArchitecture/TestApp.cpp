@@ -10,8 +10,8 @@ TestApp::TestApp(void)
 void TestApp::Init()
 {
     SceneManager::Init();
-
     this->setAmbientLight(0.2f,0.2f,0.2f);
+
     //
     Tipp7::SceneNode* n_camera = this->createChildSceneNode("MainCamera");
     Tipp7::Camera* cam = this->createCamera("myCam");
@@ -20,7 +20,7 @@ void TestApp::Init()
     //
     Tipp7::SceneNode* n_airship = this->createChildSceneNode("model0");
     Tipp7::Entity* entity = this->createEntity("AirEntity", L"Models/SphereModel.x");
-    entity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("MLS")));
+    //entity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("MLS")));
     entity->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("terrain")));
     n_airship->attachObject(entity);
     n_airship->setPosition(0, -10, 0);
@@ -38,12 +38,38 @@ void TestApp::Init()
     //n_teapot2->setPosition(15, 1, 1);
     //n_teapot2->setScale(3, 2, 2);
     //
-    Tipp7::SceneNode* n_pLight = this->createChildSceneNode("light");
-    Tipp7::Light* dirLight = this->createLight("myLight");
+    Tipp7::SceneNode* n_pLight = this->createChildSceneNode("light1");
+    Tipp7::Light* dirLight = this->createLight("myLight1");
     dirLight->setType(LightType::POINT);
-    dirLight->setDiffuseColor(1, 1, 1);
+    dirLight->setDiffuseColor(1, 1, 1, 0.5f);
+    dirLight->setSpecularColor(1, 1, 1);
+    dirLight->setPowerScale(125);
     n_pLight->attachObject(dirLight);
-    n_pLight->setPosition(100, 0, 0);
+    n_pLight->setPosition(-100, 100, 0);
+
+    Tipp7::SceneNode* n_pLight1 = this->createChildSceneNode("light2");
+    Tipp7::Light* dirLight1 = this->createLight("myLight2");
+    dirLight1->setType(LightType::POINT);
+    dirLight1->setPowerScale(100);
+    dirLight1->setDiffuseColor(1, 0, 0);
+    n_pLight1->attachObject(dirLight1);
+    n_pLight1->setPosition(100, 0, 0);
+
+    Tipp7::SceneNode* n_pLight2 = this->createChildSceneNode("light3");
+    Tipp7::Light* dirLight2 = this->createLight("myLight3");
+    dirLight2->setType(LightType::POINT);
+    dirLight2->setPowerScale(100);
+    dirLight2->setDiffuseColor(0, 1, 0);
+    n_pLight2->attachObject(dirLight2);
+    n_pLight2->setPosition(100, 0, 100);
+
+    Tipp7::SceneNode* n_pLight3 = this->createChildSceneNode("light4");
+    Tipp7::Light* dirLight3 = this->createLight("myLight4");
+    dirLight3->setType(LightType::POINT);
+    dirLight3->setPowerScale(100);
+    dirLight3->setDiffuseColor(0, 0, 1);
+    n_pLight3->attachObject(dirLight3);
+    n_pLight3->setPosition(100, 0, -100);
     
     MeshManager::GetInstance()->createPlane(
         "ground",
@@ -53,7 +79,7 @@ void TestApp::Init()
 
     Tipp7::SceneNode* n_ground = this->createChildSceneNode("Ground");
     Tipp7::Entity* groundEntity = this->createEntity("GroundEntity", "ground");
-    groundEntity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("MLS")));
+    //groundEntity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("MLS")));
     groundEntity->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("brick1")));
     n_ground->attachObject(groundEntity);
     n_ground->setPosition(0, -10, 0);
@@ -71,7 +97,7 @@ void TestApp::Update()
    SceneManager::Update();
 
    SceneNode* node = this->getSceneNode("MainCamera");
-   SceneNode* light = this->getSceneNode("light");
+   SceneNode* light = this->getSceneNode("light1");
    //
    //parent->roll(parent->rotation.z + 1);
    //
@@ -81,10 +107,10 @@ void TestApp::Update()
    else
        light->setPosition(-100, 100, 0);
 
-   if (DXUTIsKeyDown('W')) node->setPosition(node->getPosition().x, node->getPosition().y, node->getPosition().z + 1);
-   if (DXUTIsKeyDown('S')) node->setPosition(node->getPosition().x, node->getPosition().y, node->getPosition().z - 1);
-   if (DXUTIsKeyDown('A')) node->setPosition(node->getPosition().x - 1, node->getPosition().y, node->getPosition().z);
-   if (DXUTIsKeyDown('D')) node->setPosition(node->getPosition().x + 1, node->getPosition().y, node->getPosition().z);
+   if (DXUTIsKeyDown('W')) node->setTranslate(node->foward);
+   if (DXUTIsKeyDown('S')) node->setTranslate(-node->foward);
+   if (DXUTIsKeyDown('A')) node->setTranslate(-node->right);
+   if (DXUTIsKeyDown('D')) node->setTranslate(node->right);
    if (DXUTIsKeyDown('Q')) node->yaw(node->getRotation().y - 1);
    if (DXUTIsKeyDown('E')) node->yaw(node->getRotation().y + 1);
    if (DXUTIsKeyDown('R')) node->pitch(node->getRotation().x - 1);
@@ -95,11 +121,11 @@ void TestApp::Update()
    if (DXUTWasKeyPressed('M')) this->getEntity("AirEntity")->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("checker")));
 
    if (DXUTWasKeyPressed(VK_ESCAPE)) Root::GetInstance()->RootExit();
-   if (DXUTIsKeyDown('V'))
-       Root::GetInstance()->ReloadSceneManager("TestApp");
+   if (DXUTWasKeyPressed('V'))
+       Root::GetInstance()->ReloadSceneManager("GameApp");
 
-   if (DXUTIsKeyDown(VK_SPACE)) node->setPosition(node->getPosition().x, node->getPosition().y + 1, node->getPosition().z);
-   if (DXUTIsKeyDown(VK_SHIFT)) node->setPosition(node->getPosition().x, node->getPosition().y - 1, node->getPosition().z);
+   if (DXUTIsKeyDown(VK_SPACE)) node->setTranslate(Vector3(0,1,0));
+   if (DXUTIsKeyDown(VK_SHIFT)) node->setTranslate(Vector3(0, -1, 0));
 }
 
 void TestApp::Render()

@@ -13,6 +13,12 @@ public:
 	SceneNode(void) {};
 	virtual ~SceneNode(void) {};
 
+	ID3DXMesh* CircleMesh = NULL;
+	FLOAT boundCircle = 0;
+	bool isCircle = false;
+	void setBoundCircle(FLOAT radius);
+	void showBoundCircle(bool show);
+
 	void attachObject(MovableObject* _obj);
 	void detachObject(MovableObject* _obj);
 	MovableObject* getAttachObject(const string _movableName);

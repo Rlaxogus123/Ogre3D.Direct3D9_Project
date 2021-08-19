@@ -9,6 +9,7 @@
 #include "RM.h"
 #include "Root.h"
 #include "TestApp.h"
+#include "GameApp.h"
 
 
 USING(Tipp7)
@@ -50,6 +51,7 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
     RM::GetInstance()->preLoadTextures();
     Tipp7::Root::GetInstance()->RootInit();
     Root::GetInstance()->createSceneManager("TestApp", new TestApp());
+    Root::GetInstance()->createSceneManager("GameApp", new GameApp());
     return S_OK;
 }
 

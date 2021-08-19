@@ -17,7 +17,7 @@ public:
 	bool isEnable = true;
 	constexpr bool activeSelf() { return isEnable; };
 
-	virtual void Init(void);
+	virtual void Init(void); // when you call attachObject();
 	virtual void Update(void);
 	virtual void Render(void);
 	virtual void Exit(void);
