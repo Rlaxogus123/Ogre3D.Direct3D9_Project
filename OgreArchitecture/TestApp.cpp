@@ -1,5 +1,6 @@
 #include "DXUT.h"
 #include "TestApp.h"
+#include "MyMath.h"
 
 USING(Tipp7)
 
@@ -10,7 +11,7 @@ TestApp::TestApp(void)
 void TestApp::Init()
 {
     SceneManager::Init();
-    this->setAmbientLight(0.2f,0.2f,0.2f);
+    this->setAmbientLight(0.1f,0.1f,0.1f);
 
     //
     Tipp7::SceneNode* n_camera = this->createChildSceneNode("MainCamera");
@@ -20,7 +21,7 @@ void TestApp::Init()
     //
     Tipp7::SceneNode* n_airship = this->createChildSceneNode("model0");
     Tipp7::Entity* entity = this->createEntity("AirEntity", L"Models/SphereModel.x");
-    //entity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("MLS")));
+    entity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("MLS")));
     entity->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("terrain")));
     n_airship->attachObject(entity);
     n_airship->setPosition(0, -10, 0);
@@ -73,13 +74,13 @@ void TestApp::Init()
     
     MeshManager::GetInstance()->createPlane(
         "ground",
-        400, 400, 100, 100,
+        400, 400, 10, 10,
         7, 7
     );
 
     Tipp7::SceneNode* n_ground = this->createChildSceneNode("Ground");
     Tipp7::Entity* groundEntity = this->createEntity("GroundEntity", "ground");
-    //groundEntity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("MLS")));
+    groundEntity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("MLS")));
     groundEntity->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("brick1")));
     n_ground->attachObject(groundEntity);
     n_ground->setPosition(0, -10, 0);
@@ -107,12 +108,24 @@ void TestApp::Update()
    else
        light->setPosition(-100, 100, 0);
 
+   static float angle = 0.0f;
+   angle += Time::deltaTime * 30;
+
+   Vector3 v_axis(0, 0, 1);
+   D3DXQUATERNION q = *MyMath::myD3DXQuaternionRotationAxis(&q, &v_axis, D3DXToRadian(angle));
+   D3DXQUATERNION _q = *MyMath::myD3DXQuaternionConjugate(&_q, &q);
+   D3DXQUATERNION p(0, 10, -100, 0);
+   
+   D3DXQUATERNION _p = q * p * _q;
+   node->setPosition(_p.x, _p.y, _p.z);
+
+   if (DXUTIsKeyDown('Q')) node->yaw(node->getRotation().y - 1);
+   if (DXUTIsKeyDown('E')) node->yaw(node->getRotation().y + 1);
+
    if (DXUTIsKeyDown('W')) node->setTranslate(node->foward);
    if (DXUTIsKeyDown('S')) node->setTranslate(-node->foward);
    if (DXUTIsKeyDown('A')) node->setTranslate(-node->right);
    if (DXUTIsKeyDown('D')) node->setTranslate(node->right);
-   if (DXUTIsKeyDown('Q')) node->yaw(node->getRotation().y - 1);
-   if (DXUTIsKeyDown('E')) node->yaw(node->getRotation().y + 1);
    if (DXUTIsKeyDown('R')) node->pitch(node->getRotation().x - 1);
    if (DXUTIsKeyDown('F')) node->pitch(node->getRotation().x + 1);
    
@@ -121,8 +134,8 @@ void TestApp::Update()
    if (DXUTWasKeyPressed('M')) this->getEntity("AirEntity")->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("checker")));
 
    if (DXUTWasKeyPressed(VK_ESCAPE)) Root::GetInstance()->RootExit();
-   if (DXUTWasKeyPressed('V'))
-       Root::GetInstance()->ReloadSceneManager("GameApp");
+   if (DXUTWasKeyPressed('N')) Root::GetInstance()->ReloadSceneManager("ProjectileApp");
+   if (DXUTWasKeyPressed('M')) Root::GetInstance()->ReloadSceneManager("GameApp");
 
    if (DXUTIsKeyDown(VK_SPACE)) node->setTranslate(Vector3(0,1,0));
    if (DXUTIsKeyDown(VK_SHIFT)) node->setTranslate(Vector3(0, -1, 0));

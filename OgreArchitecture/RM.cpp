@@ -13,6 +13,8 @@ void RM::preLoadTextures()
 	CreateTexture(L"Textures/brick0.jpg", "brick0");
 	CreateTexture(L"Textures/brick1.jpg", "brick1");
 	CreateTexture(L"Textures/checker.jpg", "checker");
+	CreateTexture(L"Textures/red.png", "red");
+	CreateTexture(L"Textures/orange.png", "orange");
 	CreateTexture(L"Colors/FA59AMako_BaseColor.png", "Air");
 }
 

@@ -17,6 +17,7 @@ public:
 	FLOAT boundCircle = 0;
 	bool isCircle = false;
 	void setBoundCircle(FLOAT radius);
+	FLOAT getBoundCircle();
 	void showBoundCircle(bool show);
 
 	void attachObject(MovableObject* _obj);

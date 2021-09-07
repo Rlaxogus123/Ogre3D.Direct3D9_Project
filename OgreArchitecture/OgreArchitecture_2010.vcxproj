@@ -388,6 +388,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Font2D.cpp" />
+    <ClCompile Include="FontRenderer.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MeshManager.cpp" />
@@ -395,6 +397,7 @@
     <ClCompile Include="MyMath.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="ProjectileApp.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="RM.cpp" />
     <ClCompile Include="Root.cpp" />
@@ -404,9 +407,12 @@
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="TestApp.cpp" />
     <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Font2D.h" />
+    <ClInclude Include="FontRenderer.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MeshManager.h" />
@@ -414,6 +420,7 @@
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="ProjectileApp.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="RM.h" />
     <ClInclude Include="Root.h" />
@@ -423,12 +430,11 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="TestApp.h" />
     <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="Time.h" />
     <None Include="DXUT\Optional\directx.ico" />
-    <ClInclude Include="Base.h" />
     <ClInclude Include="DXUT\Core\DXUT.h" />
     <ClInclude Include="DXUT\Core\DXUTenum.h" />
     <ClInclude Include="DXUT\Core\DXUTmisc.h" />
-    <ClCompile Include="Base.cpp" />
     <ClCompile Include="DXUT\Core\DXUT.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

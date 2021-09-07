@@ -11,13 +11,13 @@ bool CollisionManager::Sphere_VS_Sphere(const Vector3 position1, const FLOAT rad
 	else return false;
 }
 
-bool CollisionManager::Sphere_VS_Plane(const Vector3 spherePosition, const FLOAT radius, const Vector3 Plane, const Vector3 size)
+bool CollisionManager::Sphere_VS_Plane(const Vector3* spherePosition, const FLOAT radius, const Vector3* Plane, const Vector3* up)
 {
 	// d = ¦¢ ax1 + by1 + cz1 + d ¦¢ / sqrt(a^2 + b^2 + c^2)
 	// d = ¦¢ ax1 + by1 + cz1 - D ¦¢ / ¡«n¡æ¡« = 1
 	// D = ax + by + cz
-	float d = fabs((size.x * spherePosition.x + size.y * spherePosition.y + size.z * spherePosition.z) - 
-		(size.x * Plane.x + size.y * Plane.y + size.z * Plane.z));
+	float d = fabs((up->x * spherePosition->x + up->y * spherePosition->y + up->z * spherePosition->z) -
+		(up->x * Plane->x + up->y * Plane->y + up->z * Plane->z));
 	if (d < radius) return true;
 	return false;
 }

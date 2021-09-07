@@ -98,6 +98,29 @@ D3DXMATRIX& Node::GetPureMatrix() const
 	return mScale * mEulerAngle * mTranslate;
 }
 
+D3DXMATRIX& Node::GetTransMatrix() const
+{
+	D3DXMATRIX mTranslate;
+	D3DXMatrixTranslation(&mTranslate, position.x, position.y, position.z);
+
+	D3DXMATRIX mRotX;
+	D3DXMATRIX mRotY;
+	D3DXMATRIX mRotZ;
+	D3DXMatrixRotationX(&mRotX, D3DXToRadian(0));
+	D3DXMatrixRotationY(&mRotY, D3DXToRadian(0));
+	D3DXMatrixRotationZ(&mRotZ, D3DXToRadian(0));
+
+	D3DXMATRIX mEulerAngle = mRotZ * mRotX * mRotY;
+
+	D3DXMATRIX mScale;
+	D3DXMatrixScaling(&mScale, 1, 1, 1);
+
+	// 이동 -> 회전 -> 변환
+	if (parent != nullptr)
+		return (mScale * mEulerAngle * mTranslate) * parent->GetMatrix();
+	return mScale * mEulerAngle * mTranslate;
+}
+
 D3DXMATRIX& Node::GetEulerMatrix() const
 {
 	D3DXMATRIX mRotX;

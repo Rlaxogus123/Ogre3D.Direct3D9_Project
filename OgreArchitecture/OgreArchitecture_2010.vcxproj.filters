@@ -81,11 +81,23 @@
     <Filter Include="1Engine\1Manager\4ResourceManager\0Resources\0Texture2D">
       <UniqueIdentifier>{2233e77b-4c21-4d3e-8383-c24f89567649}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Game\0Scene\GameApp">
-      <UniqueIdentifier>{1a49bc08-60a5-43a2-bb47-fc065f081118}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1Engine\1Manager\5CollisionManager">
       <UniqueIdentifier>{861f4e4c-77f6-4f4a-b930-b6c197f6f1c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game\0Scene\2ProjectileApp">
+      <UniqueIdentifier>{a7203229-6c18-43f1-94df-cda6fcd1abcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game\0Scene\1GameApp">
+      <UniqueIdentifier>{1a49bc08-60a5-43a2-bb47-fc065f081118}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\1Manager\6Time">
+      <UniqueIdentifier>{54c93d3f-da40-4530-8c94-947a9035a7f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\5Font">
+      <UniqueIdentifier>{9a556145-3bed-4722-affa-b603569d0d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\5Font\Font2D">
+      <UniqueIdentifier>{9908b610-7305-4ada-acfa-79841ebd7276}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +163,6 @@
     <ClCompile Include="OgreArchitecture.cpp">
       <Filter>0Default</Filter>
     </ClCompile>
-    <ClCompile Include="Base.cpp">
-      <Filter>1Engine\0Base</Filter>
-    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>1Engine\1Manager\1SceneManager</Filter>
     </ClCompile>
@@ -206,10 +215,22 @@
       <Filter>1Engine\1Manager\4ResourceManager\0Resources</Filter>
     </ClCompile>
     <ClCompile Include="GameApp.cpp">
-      <Filter>2Game\0Scene\GameApp</Filter>
+      <Filter>2Game\0Scene\1GameApp</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>1Engine\1Manager\5CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileApp.cpp">
+      <Filter>2Game\0Scene\2ProjectileApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>1Engine\1Manager\6Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Font2D.cpp">
+      <Filter>1Engine\5Font\Font2D</Filter>
+    </ClCompile>
+    <ClCompile Include="FontRenderer.cpp">
+      <Filter>1Engine\5Font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,9 +240,6 @@
     <ResourceCompile Include="OgreArchitecture.rc">
       <Filter>0Default\Resource Files</Filter>
     </ResourceCompile>
-    <ClInclude Include="Base.h">
-      <Filter>1Engine\0Base</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>1Engine\1Manager\1SceneManager</Filter>
     </ClInclude>
@@ -274,10 +292,22 @@
       <Filter>1Engine\1Manager\4ResourceManager\0Resources</Filter>
     </ClInclude>
     <ClInclude Include="GameApp.h">
-      <Filter>2Game\0Scene\GameApp</Filter>
+      <Filter>2Game\0Scene\1GameApp</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>1Engine\1Manager\5CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileApp.h">
+      <Filter>2Game\0Scene\2ProjectileApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>1Engine\1Manager\6Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Font2D.h">
+      <Filter>1Engine\5Font\Font2D</Filter>
+    </ClInclude>
+    <ClInclude Include="FontRenderer.h">
+      <Filter>1Engine\5Font</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

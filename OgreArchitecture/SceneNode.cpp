@@ -10,6 +10,11 @@ void SceneNode::setBoundCircle(FLOAT radius)
     D3DXCreateSphere(DEVICE, radius, 30, 30, &CircleMesh, NULL);
 }
 
+FLOAT SceneNode::getBoundCircle()
+{
+    return boundCircle;
+}
+
 void SceneNode::showBoundCircle(bool show)
 {
     isCircle = show;
@@ -113,7 +118,7 @@ void SceneNode::Render(void)
     }
     if (isCircle)
     {
-        DEVICE->SetTransform(D3DTS_WORLD, &GetMatrix());
+        DEVICE->SetTransform(D3DTS_WORLD, &GetTransMatrix());
         DEVICE->SetRenderState(D3DRS_FILLMODE, D3D10_FILL_WIREFRAME);
         DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
         if (CircleMesh != NULL)

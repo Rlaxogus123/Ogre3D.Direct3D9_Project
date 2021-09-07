@@ -50,7 +50,7 @@ void GameApp::Init()
     groundEntity2->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("checker")));
     n_ground2->attachObject(groundEntity2);
     n_ground2->setPosition(0, 0, 300);
-    n_ground2->pitch(-90);
+    n_ground2->pitch(-45);
 }
 
 void GameApp::Update()
@@ -81,13 +81,15 @@ void GameApp::Update()
     if (DXUTIsKeyDown(VK_UP)) model->setTranslate(Vector3(0,0,1));
     if (DXUTIsKeyDown(VK_DOWN)) model->setTranslate(Vector3(0, 0, -1));
 
-    if (CollisionManager::GetInstance()->Sphere_VS_Plane(model->getPosition(), model->boundCircle,
-        ground->getPosition(), ground->up))
+    if (CollisionManager::GetInstance()->Sphere_VS_Plane(
+        &model->getPosition(), model->boundCircle,
+        &ground->getPosition(), &ground->up))
     {
         cout << "Ground Collision Detective!!" << endl;
     }
-    else if (CollisionManager::GetInstance()->Sphere_VS_Plane(model->getPosition(), model->boundCircle,
-        wall->getPosition(), wall->up))
+    else if (CollisionManager::GetInstance()->Sphere_VS_Plane(
+        &model->getPosition(), model->boundCircle,
+        &wall->getPosition(), &wall->up))
     {
         cout << "Wall Collision Detective!!" << endl;
     }
@@ -140,7 +142,8 @@ void GameApp::Update()
     }
 
     if (DXUTWasKeyPressed('T')) this->isWireFrame = !this->isWireFrame;
-    if (DXUTWasKeyPressed('V')) Root::GetInstance()->ReloadSceneManager("TestApp");
+    if (DXUTWasKeyPressed('M')) Root::GetInstance()->ReloadSceneManager("ProjectileApp");
+    if (DXUTWasKeyPressed('N')) Root::GetInstance()->ReloadSceneManager("TestApp");
 
     if (DXUTWasKeyPressed(VK_F1)) pointlock = !pointlock;
     if (DXUTWasKeyPressed(VK_F5)) cam->setPosition(0, 3, -15);

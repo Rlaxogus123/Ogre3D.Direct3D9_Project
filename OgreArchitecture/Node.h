@@ -18,6 +18,7 @@ public:
 
 	D3DXMATRIX& GetMatrix() const;
 	D3DXMATRIX& GetPureMatrix() const;
+	D3DXMATRIX& GetTransMatrix() const;
 	D3DXMATRIX& GetEulerMatrix() const;
 
 	bool isActive = true;

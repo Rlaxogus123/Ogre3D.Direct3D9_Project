@@ -1,5 +1,6 @@
 #include "DXUT.h"
 #include "SceneManager.h"
+#include "FontRenderer.h"
 
 USING(Tipp7)
 
@@ -173,7 +174,9 @@ void SceneManager::setAmbientLight(const float _r, const float _g, const float _
 	string str = "00" + str_r + str_g + str_b;
 	char fin[9];
 	strcpy(fin, str.c_str());
+
 	ambient = (int)strtol(fin, NULL, 16);
+	DXUTGetD3D9Device()->SetRenderState(D3DRS_AMBIENT, ambient);
 }
 
 void SceneManager::Init(void)
@@ -192,8 +195,10 @@ void SceneManager::Update(void)
 
 void SceneManager::Render(void)
 {
-	DXUTGetD3D9Device()->SetRenderState(D3DRS_LIGHTING, TRUE);
+	DXUTGetD3D9Device()->SetRenderState(D3DRS_LIGHTING, FALSE);
+	//DXUTGetD3D9Device()->SetRenderState(D3DRS_LIGHTING, TRUE);
 	DXUTGetD3D9Device()->SetRenderState(D3DRS_AMBIENT, ambient);
+	//DXUTGetD3D9Device()->SetRenderState(D3DRS_AMBIENT, 0xFFFFFF);
 	DXUTGetD3D9Device()->SetRenderState(D3DRS_FILLMODE, isWireFrame ? D3D10_FILL_WIREFRAME : D3DFILL_SOLID);
 
 	for (auto& it : nodelist)
@@ -201,11 +206,14 @@ void SceneManager::Render(void)
 		if (it->activeSelf())
 			it->Render();
 	}
+	FontRenderer::GetInstance()->RenderFont();
 }
 
 void SceneManager::Exit(void)
 {
 	cout << "!! SceneManager Released !! : " << sceneName << endl;
+
+	FontRenderer::GetInstance()->Exit();
 
 	for (auto& i : nodelist)
 	{

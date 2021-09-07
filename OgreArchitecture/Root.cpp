@@ -70,11 +70,11 @@ void Root::ReloadSceneManager(const string _sceneName)
 	{
 		if (it->sceneName._Equal(_sceneName))
 		{
-			cout << "[ Success To SceneChange! ] : " << it->sceneName << endl;
 			curScene->Exit();
 			MeshManager::GetInstance()->Exit();
 			curScene = it;
 			curScene->Init();
+			cout << "[ Success To SceneChange! ] : " << it->sceneName << endl;
 			return;
 		}
 	}
