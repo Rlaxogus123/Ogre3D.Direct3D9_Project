@@ -9,6 +9,17 @@
 //式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式//
 NAMESPACE(MyMath)
 
+FLOAT mysqrt(const FLOAT amount)
+{
+	FLOAT x1 = amount;
+	FLOAT x2 = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		x2 = x1 - 1 / ((2 * x1) / (pow(x1, 2) - amount));
+	}
+	return x2;
+}
+
 FLOAT myFloatLerp(FLOAT* pOut, const FLOAT* a1, const FLOAT* a2, const FLOAT amount)
 {
 	// out = start + (end - start) * time;
@@ -43,16 +54,18 @@ FLOAT myD3DXVec3Length(const Vector3* pOut)
 
 Vector2 myD3DXVec2Normalize(Vector2* pOut, const Vector2* p1)
 {
-	pOut->x = pOut->x / myD3DXVec2Length(pOut);
-	pOut->y = pOut->y / myD3DXVec2Length(pOut);
+	//pOut->x = pOut->x / myD3DXVec2Length(pOut);
+	//pOut->y = pOut->y / myD3DXVec2Length(pOut);
+	*pOut = *p1 / D3DXVec2Length(p1);
 	return *pOut;
 }
 
 Vector3 myD3DXVec3Normalize(Vector3* pOut, const Vector3* p1)
 {
-	pOut->x = pOut->x / myD3DXVec3Length(pOut);
-	pOut->y = pOut->y / myD3DXVec3Length(pOut);
-	pOut->z = pOut->z / myD3DXVec3Length(pOut);
+	//pOut->x = pOut->x / myD3DXVec3Length(pOut);
+	//pOut->y = pOut->y / myD3DXVec3Length(pOut);
+	//pOut->z = pOut->z / myD3DXVec3Length(pOut);
+	*pOut = *p1 / myD3DXVec3Length(p1);
 	return *pOut;
 }
 

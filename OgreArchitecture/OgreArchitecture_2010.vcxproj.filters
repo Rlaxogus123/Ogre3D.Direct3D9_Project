@@ -99,6 +99,9 @@
     <Filter Include="1Engine\5Font\Font2D">
       <UniqueIdentifier>{9908b610-7305-4ada-acfa-79841ebd7276}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Game\0Scene\3Test2App">
+      <UniqueIdentifier>{ad024b35-1b47-454c-af2f-912fec1816c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -232,6 +235,9 @@
     <ClCompile Include="FontRenderer.cpp">
       <Filter>1Engine\5Font</Filter>
     </ClCompile>
+    <ClCompile Include="Test2App.cpp">
+      <Filter>2Game\0Scene\3Test2App</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -308,6 +314,9 @@
     </ClInclude>
     <ClInclude Include="FontRenderer.h">
       <Filter>1Engine\5Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Test2App.h">
+      <Filter>2Game\0Scene\3Test2App</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

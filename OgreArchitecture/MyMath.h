@@ -1,7 +1,8 @@
 #pragma once
 
 NAMESPACE(MyMath)
-	
+
+FLOAT mysqrt(const FLOAT amount);
 FLOAT myFloatLerp(FLOAT* pOut, const FLOAT* a1, const FLOAT* a2, const FLOAT amount);
 // 收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收 //
 // Vector2
@@ -39,7 +40,5 @@ FLOAT myD3DXQuaternionLength(const D3DXQUATERNION* q);
 VOID myProjectileMotion(Vector3* pOut, const Vector3* p1, const Vector3* v, const FLOAT time);
 VOID myProjectileMotionFunction(Vector3* pOut, const Vector3* p1, const Vector3* v, const FLOAT time);
 // Others
-VOID myProjectileMotion(Vector3* pOut, const Vector3* p1, const Vector3* v, const FLOAT time);
-VOID myProjectileMotionFunction(Vector3* pOut, const Vector3* p1, const Vector3* v, const FLOAT time);
 
 END
