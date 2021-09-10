@@ -38,6 +38,13 @@ void Test2App::Init()
     n_model2->setScale(0.05f, 0.05f, 0.05f);
     n_model2->setPosition(0, -10, 0);
 
+    Tipp7::SceneNode* n_model3 = this->createChildSceneNode("model3");
+    Tipp7::Entity* entity4 = this->createEntity("AirEntity", L"Models/SphereModel.x");
+    entity4->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("orange")));
+    n_model3->attachObject(entity4);
+    n_model3->setScale(0.05f, 0.05f, 0.05f);
+    n_model3->setPosition(0, -10, 0);
+
     MeshManager::GetInstance()->createPlane(
         "ground",
         400, 400, 10, 10,
@@ -66,25 +73,19 @@ void Test2App::Update()
     SceneNode* p1 = this->getSceneNode("model0");
     SceneNode* p2 = this->getSceneNode("model1");
     SceneNode* r = this->getSceneNode("model2");
+    SceneNode* r2 = this->getSceneNode("model3");
 
     static float timelike = 0.0f;
-    timelike += Time::deltaTime;
+    if (timelike < 1) timelike += Time::deltaTime;
+    else timelike = 0;
 
-    Vector3 pos1(-50, 0, 0);
-    Vector3 pos2(20, 30, 0);
-    MyMath::myD3DXVec3Normalize(&pos1, &pos1);
-    MyMath::myD3DXVec3Normalize(&pos2, &pos2);
-    pos1 *= 30;
-    pos2 *= 30;
+    Vector3 pos1(-50, 1, 0);
+    Vector3 pos2(50, 0, 0);
     p1->setPosition(pos1);
     p2->setPosition(pos2);
-
-    float w = acosf(MyMath::myD3DXVec3Dot(&pos1, &pos2) / (MyMath::myD3DXVec3Length(&pos1) * MyMath::myD3DXVec3Length(&pos2)));
-    cout << w << " : " << D3DXToDegree(w) << endl;
-
-    r->position.x = ((sin(w * (1 - timelike)) / sin(w)) * pos1.x) + ((sin(w*timelike)/sin(w)) * pos2.x);
-    r->position.y = ((sin(w * (1 - timelike)) / sin(w)) * pos1.y) + ((sin(w*timelike)/sin(w)) * pos2.y);
-    r->position.z = ((sin(w * (1 - timelike)) / sin(w)) * pos1.z) + ((sin(w*timelike)/sin(w)) * pos2.z);
+    
+    MyMath::myD3DXVec3Slerp(&r->position, &pos1, &pos2, timelike);
+    MyMath::myD3DXVec3Lerp(&r2->position, &pos1, &pos2, timelike);
 
     if (DXUTIsKeyDown('Q')) node->yaw(node->getRotation().y - 1);
     if (DXUTIsKeyDown('E')) node->yaw(node->getRotation().y + 1);

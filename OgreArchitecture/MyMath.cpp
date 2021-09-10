@@ -44,27 +44,32 @@ Vector3 myD3DXVec3Lerp(Vector3* pOut, const Vector3* p1, const Vector3* p2, cons
 
 FLOAT myD3DXVec2Length(const Vector2* pOut)
 {
-	return sqrt((pOut->x * pOut->x) + (pOut->y * pOut->y));
+	return sqrt(myD3DXVec2LengthSq(pOut));
+}
+
+FLOAT myD3DXVec2LengthSq(const Vector2* pOut)
+{
+	return (pOut->x * pOut->x) + (pOut->y * pOut->y);
 }
 
 FLOAT myD3DXVec3Length(const Vector3* pOut)
 {
-	return sqrt((pOut->x * pOut->x) + (pOut->y * pOut->y) + (pOut->z * pOut->z));
+	return sqrt(myD3DXVec3LengthSq(pOut));
+}
+
+FLOAT myD3DXVec3LengthSq(const Vector3* pOut)
+{
+	return (pOut->x * pOut->x) + (pOut->y * pOut->y) + (pOut->z * pOut->z);
 }
 
 Vector2 myD3DXVec2Normalize(Vector2* pOut, const Vector2* p1)
 {
-	//pOut->x = pOut->x / myD3DXVec2Length(pOut);
-	//pOut->y = pOut->y / myD3DXVec2Length(pOut);
 	*pOut = *p1 / D3DXVec2Length(p1);
 	return *pOut;
 }
 
 Vector3 myD3DXVec3Normalize(Vector3* pOut, const Vector3* p1)
 {
-	//pOut->x = pOut->x / myD3DXVec3Length(pOut);
-	//pOut->y = pOut->y / myD3DXVec3Length(pOut);
-	//pOut->z = pOut->z / myD3DXVec3Length(pOut);
 	*pOut = *p1 / myD3DXVec3Length(p1);
 	return *pOut;
 }
@@ -84,6 +89,16 @@ Vector3 myD3DXVec3Cross(Vector3* pOut, const Vector3* p1, const Vector3* p2)
 	pOut->x = (p1->y * p2->z) - (p2->y * p1->z);
 	pOut->y = (p1->z * p2->x) - (p2->z * p1->x);
 	pOut->z = (p1->x * p2->y) - (p2->x * p1->y);
+	return *pOut;
+}
+
+Vector3 myD3DXVec3Slerp(Vector3* pOut, const Vector3* p1, const Vector3* p2, const FLOAT time)
+{
+	// 각속도 w는 1초동안 각도∂을 움직였다.. 라는 의미를 가지게 됨. 따라서 1.0을 곱하는 것이 맞다.
+	FLOAT w = acosf(myD3DXVec3Dot(p1, p2) / (pow(myD3DXVec3Length(p1),2))) * 1.0f;
+	pOut->x = ((sin(w * (1 - time)) / sin(w)) * p1->x) + ((sin(w * time) / sin(w)) * p2->x);
+	pOut->y = ((sin(w * (1 - time)) / sin(w)) * p1->y) + ((sin(w * time) / sin(w)) * p2->y);
+	pOut->z = ((sin(w * (1 - time)) / sin(w)) * p1->z) + ((sin(w * time) / sin(w)) * p2->z);
 	return *pOut;
 }
 
@@ -139,28 +154,35 @@ D3DXMATRIX myD3DXMatrixMultiply(D3DXMATRIX* pOut, const D3DXMATRIX* m1, const D3
 	return D3DXMATRIX();
 }
 
-D3DXQUATERNION* myD3DXQuaternionRotationAxis(D3DXQUATERNION* pOut, Vector3* N, const FLOAT radian)
+D3DXQUATERNION* myD3DXQuaternionRotationAxis(D3DXQUATERNION* pOut, const Vector3* N, const FLOAT radian)
 {
-	N = &myD3DXVec3Normalize(N, N);
-	pOut->x = sinf(radian / 2) * N->x;
-	pOut->y = sinf(radian / 2) * N->y;
-	pOut->z = sinf(radian / 2) * N->z;
-	pOut->w = cosf(radian / 2);
+	Vector3 n = myD3DXVec3Normalize(&n, N);
+	FLOAT s = cos(radian / 2.0f);
+	Vector3 v = sin(radian / 2.0f) * n;
+	*pOut = D3DXQUATERNION(v.x, v.y, v.z, s);
 	return pOut;
 }
 
 D3DXQUATERNION* myD3DXQuaternionConjugate(D3DXQUATERNION* pOut, const D3DXQUATERNION* q)
 {
-	pOut->x = q->x * -1;
-	pOut->y = q->y * -1;
-	pOut->z = q->z * -1;
-	pOut->w = q->w * 1;
+	FLOAT s = q->w;
+	Vector3 v(Vector3(q->x, q->y, q->z));
+	Vector3 _v(v * -1);
+	*pOut = D3DXQUATERNION(_v.x, _v.y, _v.z, s);
 	return pOut;
+}
+
+FLOAT myD3DXQuaternionLengthSq(const D3DXQUATERNION* q)
+{
+	FLOAT s = q->w;
+	Vector3 v(Vector3(q->x, q->y, q->z));
+
+	return s * s + D3DXVec3LengthSq(&v);
 }
 
 FLOAT myD3DXQuaternionLength(const D3DXQUATERNION* q)
 {
-	return sqrt((q->x * q->x) + (q->y * q->y) + (q->z * q->z) + (q->w * q->w));
+	return sqrt(myD3DXQuaternionLengthSq(q));
 }
 
 VOID myProjectileMotion(Vector3* pOut, const Vector3* p1, const Vector3* v, const FLOAT time)
