@@ -111,13 +111,15 @@ void TestApp::Update()
    static float angle = 0.0f;
    angle += Time::deltaTime * 30;
 
-   Vector3 v_axis(0, 0, 1);
-   D3DXQUATERNION q = *MyMath::myD3DXQuaternionRotationAxis(&q, &v_axis, D3DXToRadian(angle));
-   D3DXQUATERNION _q = *MyMath::myD3DXQuaternionConjugate(&_q, &q);
-   D3DXQUATERNION p(0, 10, -100, 0);
-   
-   D3DXQUATERNION _p = q * p * _q;
-   node->setPosition(_p.x, _p.y, _p.z);
+   MyMath::myD3DXVec3RotationAxis(&node->position , &Vector3(30,0,-100), &Vector3(0,0,1), D3DXToRadian(angle));
+
+   //Vector3 v_axis(0, 0, 1);
+   //D3DXQUATERNION q = *MyMath::myD3DXQuaternionRotationAxis(&q, &v_axis, D3DXToRadian(angle));
+   //D3DXQUATERNION _q = *MyMath::myD3DXQuaternionConjugate(&_q, &q);
+   //D3DXQUATERNION p(0, 10, -100, 0);
+   //
+   //D3DXQUATERNION _p = q * p * _q;
+   //node->setPosition(_p.x, _p.y, _p.z);
 
    if (DXUTIsKeyDown('Q')) node->yaw(node->getRotation().y - 1);
    if (DXUTIsKeyDown('E')) node->yaw(node->getRotation().y + 1);

@@ -20,7 +20,9 @@ FLOAT myD3DXVec3LengthSq(const Vector3* pOut);
 Vector3 myD3DXVec3Normalize(Vector3* pOut, const Vector3* p1);
 FLOAT myD3DXVec3Dot(const Vector3* p1, const Vector3* p2);
 Vector3 myD3DXVec3Cross(Vector3* pOut, const Vector3* p1, const Vector3* p2);
+Vector3 myD3DXVec3Cross(const Vector3* p1, const Vector3* p2);
 Vector3 myD3DXVec3Slerp(Vector3* pOut, const Vector3* p1, const Vector3* p2, const FLOAT time);
+Vector3 myD3DXVec3RotationAxis(Vector3* pOut, const Vector3* r, const Vector3* n, const FLOAT angle);
 // Vector3
 // 收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收 //
 // Matrix
@@ -33,6 +35,9 @@ D3DXMATRIX myD3DXMatrixMultiply(D3DXMATRIX* pOut, const D3DXMATRIX* m1, const D3
 // Quaternion
 D3DXQUATERNION* myD3DXQuaternionRotationAxis(D3DXQUATERNION* pOut, const Vector3* N, const FLOAT radian);
 D3DXQUATERNION* myD3DXQuaternionConjugate(D3DXQUATERNION* pOut, const D3DXQUATERNION* q);
+D3DXQUATERNION* myD3DXQuaternionSlerp(D3DXQUATERNION* pOut, const D3DXQUATERNION* q0, const D3DXQUATERNION* q1, const FLOAT time);
+D3DXQUATERNION* myD3DXQuaternionNormalize(D3DXQUATERNION* pOut, const D3DXQUATERNION* q);
+FLOAT myD3DXQuaternionDot(const D3DXQUATERNION* q0, const D3DXQUATERNION* q1);
 FLOAT myD3DXQuaternionLengthSq(const D3DXQUATERNION* q);
 FLOAT myD3DXQuaternionLength(const D3DXQUATERNION* q);
 // Quaternion

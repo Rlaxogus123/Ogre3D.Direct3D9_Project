@@ -53,8 +53,8 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 {
     RM::GetInstance()->preLoadTextures();
     Tipp7::Root::GetInstance()->RootInit();
-    Root::GetInstance()->createSceneManager("Test2App", new Test2App());
     Root::GetInstance()->createSceneManager("TestApp", new TestApp());
+    Root::GetInstance()->createSceneManager("Test2App", new Test2App());
     Root::GetInstance()->createSceneManager("GameApp", new GameApp());
     Root::GetInstance()->createSceneManager("ProjectileApp", new ProjectileApp());
     printf("%f", MyMath::mysqrt(2));

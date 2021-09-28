@@ -83,7 +83,10 @@ void Test2App::Update()
     Vector3 pos2(50, 0, 0);
     p1->setPosition(pos1);
     p2->setPosition(pos2);
-    
+
+    D3DXQUATERNION q0(0, pos1.x, pos1.y, pos1.z);
+    D3DXQUATERNION q1(0, pos2.x, pos2.y, pos2.z);
+
     MyMath::myD3DXVec3Slerp(&r->position, &pos1, &pos2, timelike);
     MyMath::myD3DXVec3Lerp(&r2->position, &pos1, &pos2, timelike);
 

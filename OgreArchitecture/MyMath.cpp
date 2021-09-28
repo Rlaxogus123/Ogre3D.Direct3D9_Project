@@ -15,7 +15,7 @@ FLOAT mysqrt(const FLOAT amount)
 	FLOAT x2 = 0;
 	for (int i = 0; i < 10; i++)
 	{
-		x2 = x1 - 1 / ((2 * x1) / (pow(x1, 2) - amount));
+		x2 = x1 - (1 / ((2 * x1) / (pow(x1, 2) - amount)));
 	}
 	return x2;
 }
@@ -49,7 +49,7 @@ FLOAT myD3DXVec2Length(const Vector2* pOut)
 
 FLOAT myD3DXVec2LengthSq(const Vector2* pOut)
 {
-	return (pOut->x * pOut->x) + (pOut->y * pOut->y);
+	return myD3DXVec2Dot(pOut, pOut);
 }
 
 FLOAT myD3DXVec3Length(const Vector3* pOut)
@@ -59,7 +59,7 @@ FLOAT myD3DXVec3Length(const Vector3* pOut)
 
 FLOAT myD3DXVec3LengthSq(const Vector3* pOut)
 {
-	return (pOut->x * pOut->x) + (pOut->y * pOut->y) + (pOut->z * pOut->z);
+	return myD3DXVec3Dot(pOut, pOut);
 }
 
 Vector2 myD3DXVec2Normalize(Vector2* pOut, const Vector2* p1)
@@ -92,13 +92,27 @@ Vector3 myD3DXVec3Cross(Vector3* pOut, const Vector3* p1, const Vector3* p2)
 	return *pOut;
 }
 
+Vector3 myD3DXVec3Cross(const Vector3* p1, const Vector3* p2)
+{
+	return Vector3((p1->y * p2->z) - (p2->y * p1->z), (p1->z * p2->x) - (p2->z * p1->x), (p1->x * p2->y) - (p2->x * p1->y));
+}
+
 Vector3 myD3DXVec3Slerp(Vector3* pOut, const Vector3* p1, const Vector3* p2, const FLOAT time)
 {
-	// 각속도 w는 1초동안 각도∂을 움직였다.. 라는 의미를 가지게 됨. 따라서 1.0을 곱하는 것이 맞다.
-	FLOAT w = acosf(myD3DXVec3Dot(p1, p2) / (pow(myD3DXVec3Length(p1),2))) * 1.0f;
-	pOut->x = ((sin(w * (1 - time)) / sin(w)) * p1->x) + ((sin(w * time) / sin(w)) * p2->x);
-	pOut->y = ((sin(w * (1 - time)) / sin(w)) * p1->y) + ((sin(w * time) / sin(w)) * p2->y);
-	pOut->z = ((sin(w * (1 - time)) / sin(w)) * p1->z) + ((sin(w * time) / sin(w)) * p2->z);
+	// 각속도 w는 1초동안 각도∂을 움직였다.. 라는 의미를 가지게 됨.
+	FLOAT theta = acosf(myD3DXVec3Dot(p1, p2) / myD3DXVec3LengthSq(p1));
+	FLOAT omega = theta / 1.0f;
+	FLOAT a = sin(omega * (1.0f - time));
+	FLOAT b = sin(omega * time);
+	*pOut = (a * (*p1) + b * (*p2)) / sin(omega * 1.0f);
+	return *pOut;
+}
+
+Vector3 myD3DXVec3RotationAxis(Vector3* pOut, const Vector3* r, const Vector3* n, const FLOAT angle)
+{
+	pOut->x = (cosf(angle) * r->x) + ((1 - cosf(angle)) * (myD3DXVec3Dot(n, r)) * n->x) + (sinf(angle) * (myD3DXVec3Cross(n, r).x));
+	pOut->y = (cosf(angle) * r->y) + ((1 - cosf(angle)) * (myD3DXVec3Dot(n, r)) * n->y) + (sinf(angle) * (myD3DXVec3Cross(n, r).y));
+	pOut->z = (cosf(angle) * r->z) + ((1 - cosf(angle)) * (myD3DXVec3Dot(n, r)) * n->z) + (sinf(angle) * (myD3DXVec3Cross(n, r).z));
 	return *pOut;
 }
 
@@ -154,6 +168,15 @@ D3DXMATRIX myD3DXMatrixMultiply(D3DXMATRIX* pOut, const D3DXMATRIX* m1, const D3
 	return D3DXMATRIX();
 }
 
+FLOAT myD3DXQuaternionDot(const D3DXQUATERNION* q0, const D3DXQUATERNION* q1)
+{
+	FLOAT s1 = q0->w;
+	FLOAT s2 = q1->w;
+	Vector3 v1(q0->x, q0->y, q0->z);
+	Vector3 v2(q1->x, q1->y, q1->z);
+	return s1 * s2 + myD3DXVec3Dot(&v1,&v2);
+}
+
 D3DXQUATERNION* myD3DXQuaternionRotationAxis(D3DXQUATERNION* pOut, const Vector3* N, const FLOAT radian)
 {
 	Vector3 n = myD3DXVec3Normalize(&n, N);
@@ -172,12 +195,26 @@ D3DXQUATERNION* myD3DXQuaternionConjugate(D3DXQUATERNION* pOut, const D3DXQUATER
 	return pOut;
 }
 
+D3DXQUATERNION* myD3DXQuaternionSlerp(D3DXQUATERNION* pOut, const D3DXQUATERNION* q0, const D3DXQUATERNION* q1, const FLOAT time)
+{
+	// 각속도 w는 1초동안 각도∂을 움직였다.. 라는 의미를 가지게 됨.
+	FLOAT theta = acosf(myD3DXQuaternionDot(q0, q1) / 1.0f);
+	FLOAT omega = theta / 1.0f;
+	FLOAT a = sin(omega * (1.0f - time));
+	FLOAT b = sin(omega * time);
+	*pOut = (a * (*q0) + b * (*q1)) / sin(omega * 1.0f);
+	return pOut;
+}
+
+D3DXQUATERNION* myD3DXQuaternionNormalize(D3DXQUATERNION* pOut, const D3DXQUATERNION* q)
+{
+	*pOut = *q / myD3DXQuaternionLength(q);
+	return pOut;
+}
+
 FLOAT myD3DXQuaternionLengthSq(const D3DXQUATERNION* q)
 {
-	FLOAT s = q->w;
-	Vector3 v(Vector3(q->x, q->y, q->z));
-
-	return s * s + D3DXVec3LengthSq(&v);
+	return myD3DXQuaternionDot(q, q);
 }
 
 FLOAT myD3DXQuaternionLength(const D3DXQUATERNION* q)
