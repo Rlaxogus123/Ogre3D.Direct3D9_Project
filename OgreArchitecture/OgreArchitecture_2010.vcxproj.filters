@@ -102,6 +102,12 @@
     <Filter Include="2Game\0Scene\3Test2App">
       <UniqueIdentifier>{ad024b35-1b47-454c-af2f-912fec1816c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2Game\0Scene\4SquadApp">
+      <UniqueIdentifier>{0376bebb-660b-407b-b3ff-d5b86675e68e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game\0Scene\ShaderTest">
+      <UniqueIdentifier>{4fa98c18-2ea8-44ab-a7f1-37da8cc1ee00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -161,6 +167,7 @@
     <ClCompile Include="DXUT\Optional\SDKmisc.cpp">
       <Filter>0Default\DXUT</Filter>
     </ClCompile>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OgreArchitecture.cpp">
@@ -237,6 +244,12 @@
     </ClCompile>
     <ClCompile Include="Test2App.cpp">
       <Filter>2Game\0Scene\3Test2App</Filter>
+    </ClCompile>
+    <ClCompile Include="SquadApp.cpp">
+      <Filter>2Game\0Scene\4SquadApp</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderTest.cpp">
+      <Filter>2Game\0Scene\ShaderTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -317,6 +330,12 @@
     </ClInclude>
     <ClInclude Include="Test2App.h">
       <Filter>2Game\0Scene\3Test2App</Filter>
+    </ClInclude>
+    <ClInclude Include="SquadApp.h">
+      <Filter>2Game\0Scene\4SquadApp</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderTest.h">
+      <Filter>2Game\0Scene\ShaderTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

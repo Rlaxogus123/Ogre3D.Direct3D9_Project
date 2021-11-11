@@ -15,6 +15,7 @@ public:
 	Vector3 position = { 0,0,0 };
 	Vector3 scale = { 1,1,1 };
 	Vector3 rotation = { 0,0,0 };
+	D3DXMATRIX* matQuaternion = nullptr;
 
 	D3DXMATRIX& GetMatrix() const;
 	D3DXMATRIX& GetPureMatrix() const;
@@ -24,6 +25,7 @@ public:
 	bool isActive = true;
 	constexpr bool activeSelf() { return isActive; };
 
+	void createQuaternion(void);
 	void setDirection(const Vector3 _dir);
 
 	void setTranslate(const float x = 0.0f, const float y = 0.0f, const float z = 0.0f);

@@ -24,6 +24,8 @@
 #include "Test2App.h"
 #include "GameApp.h"
 #include "ProjectileApp.h"
+#include "SquadApp.h"
+#include "ShaderTest.h"
 
 
 USING(Tipp7)
@@ -51,8 +53,11 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
 {
+    srand(time(NULL));
     RM::GetInstance()->preLoadTextures();
     Tipp7::Root::GetInstance()->RootInit();
+    Root::GetInstance()->createSceneManager("ShaderTest", new ShaderTest());
+    Root::GetInstance()->createSceneManager("SquadApp", new SquadApp());
     Root::GetInstance()->createSceneManager("TestApp", new TestApp());
     Root::GetInstance()->createSceneManager("Test2App", new Test2App());
     Root::GetInstance()->createSceneManager("GameApp", new GameApp());

@@ -3,6 +3,12 @@
 
 USING(Tipp7)
 
+void Node::createQuaternion(void)
+{
+	matQuaternion = new D3DXMATRIX();
+	D3DXMatrixIdentity(matQuaternion);
+}
+
 void Node::setDirection(const Vector3 _dir)
 {
 
@@ -59,17 +65,24 @@ D3DXMATRIX& Node::GetMatrix() const
 	D3DXMATRIX mTranslate;
 	D3DXMatrixTranslation(&mTranslate, position.x, position.y, position.z);
 
-	D3DXMATRIX mRotX;
-	D3DXMATRIX mRotY;
-	D3DXMATRIX mRotZ;
-	D3DXMatrixRotationX(&mRotX, D3DXToRadian(rotation.x));
-	D3DXMatrixRotationY(&mRotY, D3DXToRadian(rotation.y));
-	D3DXMatrixRotationZ(&mRotZ, D3DXToRadian(rotation.z));
-
-	D3DXMATRIX mEulerAngle = mRotZ * mRotX * mRotY;
-
 	D3DXMATRIX mScale;
 	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
+	D3DXMATRIX mEulerAngle;
+
+	if (matQuaternion != nullptr)
+	{
+		mEulerAngle = *matQuaternion;
+	}
+	else
+	{
+		D3DXMATRIX mRotX;
+		D3DXMATRIX mRotY;
+		D3DXMATRIX mRotZ;
+		D3DXMatrixRotationX(&mRotX, D3DXToRadian(rotation.x));
+		D3DXMatrixRotationY(&mRotY, D3DXToRadian(rotation.y));
+		D3DXMatrixRotationZ(&mRotZ, D3DXToRadian(rotation.z));
+		mEulerAngle = mRotZ * mRotX * mRotY;
+	}
 
 	// 이동 -> 회전 -> 변환
 	if (parent != nullptr)
@@ -81,15 +94,22 @@ D3DXMATRIX& Node::GetPureMatrix() const
 {
 	D3DXMATRIX mTranslate;
 	D3DXMatrixTranslation(&mTranslate, position.x, position.y, position.z);
+	D3DXMATRIX mEulerAngle;
 
-	D3DXMATRIX mRotX;
-	D3DXMATRIX mRotY;
-	D3DXMATRIX mRotZ;
-	D3DXMatrixRotationX(&mRotX, D3DXToRadian(rotation.x));
-	D3DXMatrixRotationY(&mRotY, D3DXToRadian(rotation.y));
-	D3DXMatrixRotationZ(&mRotZ, D3DXToRadian(rotation.z));
-
-	D3DXMATRIX mEulerAngle = mRotZ * mRotX * mRotY;
+	if (matQuaternion != nullptr)
+	{
+		mEulerAngle = *matQuaternion;
+	}
+	else
+	{
+		D3DXMATRIX mRotX;
+		D3DXMATRIX mRotY;
+		D3DXMATRIX mRotZ;
+		D3DXMatrixRotationX(&mRotX, D3DXToRadian(rotation.x));
+		D3DXMatrixRotationY(&mRotY, D3DXToRadian(rotation.y));
+		D3DXMatrixRotationZ(&mRotZ, D3DXToRadian(rotation.z));
+		mEulerAngle = mRotZ * mRotX * mRotY;
+	}
 
 	D3DXMATRIX mScale;
 	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);

@@ -25,6 +25,7 @@ void TestApp::Init()
     entity->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("terrain")));
     n_airship->attachObject(entity);
     n_airship->setPosition(0, -10, 0);
+    n_airship->createQuaternion();
     //
     //Tipp7::SceneNode* n_teapot = this->createChildSceneNode("model1");
     //Tipp7::Entity* entity2 = this->createEntity("Teapot1", L"Models/MyCutieZombie.x");
@@ -91,6 +92,17 @@ void TestApp::Init()
     //n_park->attachObject(entity_park);
     //n_park->setPosition(-20, -10, 10);
     //n_park->setScale(5, 5, 5);
+
+    D3DXQUATERNION q1(3, 6, 4, 31);
+    D3DXQUATERNION q2(3,6,4,31);
+    cout << "Before收收收收收收收收收收收收收" << endl;
+    MyMath::__ShowQuaternion(&q1, "D3DX");
+    MyMath::__ShowQuaternion(&q2, "_MY_");
+    cout << "After收收收收收收收收收收收收收" << endl;
+    D3DXQuaternionLn(&q1, &q1);
+    MyMath::myD3DXQuaternionLn(&q2, &q2);
+    MyMath::__ShowQuaternion(&q1, "D3DX");
+    MyMath::__ShowQuaternion(&q2, "_MY_");
 }
 
 void TestApp::Update()
@@ -98,6 +110,7 @@ void TestApp::Update()
    SceneManager::Update();
 
    SceneNode* node = this->getSceneNode("MainCamera");
+   SceneNode* model = this->getSceneNode("model0");
    SceneNode* light = this->getSceneNode("light1");
    //
    //parent->roll(parent->rotation.z + 1);
@@ -105,21 +118,28 @@ void TestApp::Update()
 
    if (light->getPosition().x < 100)
        light->setTranslate(1, 0, 0);
-   else
-       light->setPosition(-100, 100, 0);
+   else light->setPosition(-100, 100, 0);
 
    static float angle = 0.0f;
    angle += Time::deltaTime * 30;
 
-   MyMath::myD3DXVec3RotationAxis(&node->position , &Vector3(30,0,-100), &Vector3(0,0,1), D3DXToRadian(angle));
+   //D3DXQUATERNION* qq = new D3DXQUATERNION();
+   D3DXQUATERNION Q = *D3DXQuaternionRotationAxis(&Q, &Vector3(1, 1, 0), D3DXToRadian(angle));
+   D3DXMatrixRotationQuaternion(model->matQuaternion, &Q);
+   //model->quaternion = qq;
+   //model
 
-   //Vector3 v_axis(0, 0, 1);
-   //D3DXQUATERNION q = *MyMath::myD3DXQuaternionRotationAxis(&q, &v_axis, D3DXToRadian(angle));
-   //D3DXQUATERNION _q = *MyMath::myD3DXQuaternionConjugate(&_q, &q);
-   //D3DXQUATERNION p(0, 10, -100, 0);
-   //
-   //D3DXQUATERNION _p = q * p * _q;
-   //node->setPosition(_p.x, _p.y, _p.z);
+   //MyMath::myD3DXVec3RotationAxis(&node->position , &Vector3(30,0,-100), &Vector3(0,0,1), D3DXToRadian(angle));
+
+   Vector3 v_axis(0, 0, 1);
+   D3DXQUATERNION q = *MyMath::myD3DXQuaternionRotationAxis(&q, &v_axis, D3DXToRadian(angle));
+   D3DXQUATERNION _q = *MyMath::myD3DXQuaternionConjugate(&_q, &q);
+   D3DXQUATERNION p(0, 10, -100, 0);
+   
+   D3DXQUATERNION p1 = *MyMath::myD3DXQuaternionMultiply(&p1, &_q, &p);
+   D3DXQUATERNION _p = *MyMath::myD3DXQuaternionMultiply(&p, &p1, &q);
+    
+   node->setPosition(_p.x, _p.y, _p.z);
 
    if (DXUTIsKeyDown('Q')) node->yaw(node->getRotation().y - 1);
    if (DXUTIsKeyDown('E')) node->yaw(node->getRotation().y + 1);

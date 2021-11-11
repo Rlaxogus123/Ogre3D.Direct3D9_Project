@@ -404,7 +404,9 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderTest.cpp" />
     <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="SquadApp.cpp" />
     <ClCompile Include="Test2App.cpp" />
     <ClCompile Include="TestApp.cpp" />
     <ClCompile Include="Texture2D.cpp" />
@@ -428,11 +430,14 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderTest.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SquadApp.h" />
     <ClInclude Include="Test2App.h" />
     <ClInclude Include="TestApp.h" />
     <ClInclude Include="Texture2D.h" />
     <ClInclude Include="Time.h" />
+    <None Include="cpp.hint" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />
     <ClInclude Include="DXUT\Core\DXUTenum.h" />
