@@ -66,6 +66,21 @@ void Entity::SetTexture(Texture2D* texture, const int _number)
 	MeshTextures[_number].texture = texture->texture;
 }
 
+void Entity::SetSpecularMap(Texture2D* texture)
+{
+	Specular_texture = texture->texture;
+}
+
+void Entity::SetNormalMap(Texture2D* texture)
+{
+	Normal_texture = texture->texture;
+}
+
+void Entity::SetDiffuseMap(Texture2D* texture)
+{
+	Diffuse_texture = texture->texture;
+}
+
 void Entity::SetEffect(Shader* _shader)
 {
 	shader = _shader;
@@ -77,46 +92,32 @@ void Entity::Render(void)
 
 	if (shader != nullptr)
 	{
-		for (int z = 0; z < 2; z++)
+		shader->Render(node->GetMatrix());
+
+		// 쉐이더 전역변수들을 설정
+		shader->effect->SetVector((D3DXHANDLE)"gWorldLightPosition", &Vector4(0, -1, 0, 0));
+
+		shader->effect->SetVector((D3DXHANDLE)"gLightColor", &Vector4(1,1,1,1));
+		shader->effect->SetVector((D3DXHANDLE)"gLightAmbient", &Vector4(0.1,0.1,0.1,1));
+
+		shader->effect->SetTexture((D3DXHANDLE)"DiffuseMap_Tex", Diffuse_texture);
+		shader->effect->SetTexture((D3DXHANDLE)"fieldstone_SM_Tex", Specular_texture);
+		shader->effect->SetTexture((D3DXHANDLE)"NormalMap_Tex", Normal_texture);
+
+		// 쉐이더를 시작한다.
+		UINT numPasses = 0;
+		shader->effect->Begin(&numPasses, NULL);
 		{
-			shader->Render(node->GetMatrix());
-		
-			D3DXMATRIX matView;
-			D3DXMATRIX camWorld;
-			Vector3 camPos = { 1,1,1 };
-		
-			D3DLIGHT9 light;
-			DEVICE->GetTransform(D3DTS_VIEW, &matView);
-			DEVICE->GetLight(z, &light);
-		
-			D3DXVECTOR4 lightposition = { 0,3,-75, 1 };
-			D3DXVECTOR4 ambient = { 0.1f,0.1f,0.1f, 1 };
-		
-			D3DXMatrixInverse(&camWorld, NULL, &matView);
-			D3DXVec3TransformCoord(&camPos, &camPos, &camWorld);
-			shader->effect->SetVector((D3DXHANDLE)"gWorldCameraPosition", &(D3DXVECTOR4)camPos);
-			shader->effect->SetVector((D3DXHANDLE)"gWorldLightPosition", &lightposition);
-			shader->effect->SetVector((D3DXHANDLE)"AmbientPower", &ambient);
-			shader->effect->SetFloat((D3DXHANDLE)"gLightPower", 160.0f);
-		
-			UINT numPasses = 0;
-			shader->effect->Begin(&numPasses, NULL);
-			for (UINT j = 0; j < numPasses; ++j)
+			for (UINT i = 0; i < numPasses; ++i)
 			{
-				shader->effect->BeginPass(j);
-				shader->effect->CommitChanges();
-				for (DWORD i = 0; i < numMaterials; i++)
+				shader->effect->BeginPass(i);
 				{
-					if (MeshMaterials != NULL)
-						DXUTGetD3D9Device()->SetMaterial(&MeshMaterials[i]);
-					DXUTGetD3D9Device()->SetTexture(0, MeshTextures[i].texture);
-					Mesh->DrawSubset(i);
+					Mesh->DrawSubset(0);
 				}
-				DXUTGetD3D9Device()->SetTexture(0, NULL);
 				shader->effect->EndPass();
 			}
-			shader->effect->End();
 		}
+		shader->effect->End();
 	}
 	else
 	{
@@ -134,6 +135,9 @@ void Entity::Render(void)
 void Entity::Exit(void)
 {
 	cout << "!! Entity Released !! : " << movableName << endl;
+	SAFE_RELEASE(Specular_texture);
+	SAFE_RELEASE(Normal_texture);
+	SAFE_RELEASE(Diffuse_texture);
 	SAFE_DELETE_ARRAY(MeshMaterials);
 	if (MeshTextures)
 	{

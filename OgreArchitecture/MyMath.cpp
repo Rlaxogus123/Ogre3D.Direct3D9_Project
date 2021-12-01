@@ -119,6 +119,53 @@ Vector3* __Vec3RotationAxis(Vector3* pOut, const Vector3* r, const Vector3* n, c
 	return pOut;
 }
 
+Vector3* myD3DXVec3Hermite(Vector3* pOut, const Vector3* p_0, const Vector3* T_0, const Vector3* p_1, const Vector3* T_1, FLOAT time)
+{
+	D3DXMATRIX A = {
+		0,0,0,1,
+		1,1,1,1,
+		0,0,1,0,
+		3,2,1,0
+	};
+	D3DXMATRIX C = {
+		p_0->x,p_0->y,p_0->z,0,
+		p_1->x,p_1->y,p_1->z,0,
+		T_0->x,T_0->y,T_0->z,0,
+		T_1->x,T_1->y,T_1->z,0
+	};
+
+	D3DXMATRIX mOut;
+	D3DXMatrixInverse(&A, NULL, &A);
+	D3DXMatrixMultiply(&mOut, &A, &C);
+
+	Vector3 a, b, c, d;
+	a = { mOut._11, mOut._12, mOut._13 };
+	b = { mOut._21, mOut._22, mOut._23 };
+	c = { mOut._31, mOut._32, mOut._33 };
+	d = { mOut._41, mOut._42, mOut._43 };
+
+	*pOut = a * pow(time, 3) + b * pow(time, 2) + (c * time) + d;
+	return pOut;
+}
+
+Vector3* myD3DXVec3CatmullRom(Vector3* pOut, const Vector3* p_0, const Vector3* p_1, const Vector3* p_2, const Vector3* p_3, FLOAT time)
+{
+	Vector3 T_0 = (*p_2 - *p_0) / 2;
+	Vector3 T_1 = (*p_3 - *p_1) / 2;
+	
+	myD3DXVec3Hermite(pOut, p_1, &T_0, p_2, &T_1, time);
+	return pOut;
+}
+
+Vector3* myD3DXVec3KochanekBartels(Vector3* pOut, const Vector3* p_0, const Vector3* p_1, const Vector3* p_2, const Vector3* p_3, const FLOAT t, const FLOAT b, const FLOAT c, FLOAT time)
+{
+	Vector3 T_0 = 0.5f * (1.0f - t) * ((1.0f + b) * (1.0f - c) * (*p_1 - *p_0) + (1.0f - b) * (1.0 + c) * (*p_2 - *p_1));
+	Vector3 T_1 = 0.5f * (1.0f - t) * ((1.0f + b) * (1.0f + c) * (*p_2 - *p_1) + (1.0f - b) * (1.0 - c) * (*p_3 - *p_2));
+
+	myD3DXVec3Hermite(pOut, p_1, &T_0, p_2, &T_1, time);
+	return pOut;
+}
+
 VOID __ShowMatrix(const D3DXMATRIX* m, const string name)
 {
 	cout << "бс " << name << " бс" << endl;

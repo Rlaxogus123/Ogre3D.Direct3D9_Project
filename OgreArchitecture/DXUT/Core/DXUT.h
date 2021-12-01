@@ -367,6 +367,7 @@ using namespace std;
 #define SCW 1600
 #define SCH 900
 
+typedef D3DXVECTOR4 Vector4;
 typedef D3DXVECTOR3 Vector3;
 typedef D3DXVECTOR2 Vector2;
 typedef D3DXCOLOR Color;

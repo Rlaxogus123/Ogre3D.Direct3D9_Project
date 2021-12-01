@@ -76,7 +76,7 @@ void SquadApp::Update()
     
     if (moveType == SHOWCASE::CATMULL) {
         movable = "Catmull-rom";
-        node->setPosition(*D3DXVec3CatmullRom(&node->position, &catmull_list[0 + circle], &catmull_list[1 + circle], &catmull_list[2 + circle], &catmull_list[3 + circle], time));
+        node->setPosition(*MyMath::myD3DXVec3CatmullRom(&node->position, &catmull_list[0 + circle], &catmull_list[1 + circle], &catmull_list[2 + circle], &catmull_list[3 + circle], time));
     }
     if (moveType == SHOWCASE::LERP) {
         movable = "Lerp";

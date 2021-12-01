@@ -24,6 +24,10 @@ Vector3* myD3DXVec3Cross(Vector3* pOut, const Vector3* p1, const Vector3* p2);
 Vector3 myD3DXVec3Cross(const Vector3* p1, const Vector3* p2);
 Vector3* myD3DXVec3Slerp(Vector3* pOut, const Vector3* p1, const Vector3* p2, const FLOAT time);
 Vector3* __Vec3RotationAxis(Vector3* pOut, const Vector3* r, const Vector3* n, const FLOAT angle);
+Vector3* myD3DXVec3Hermite(Vector3* pOut, const Vector3* p_0, const Vector3* T_0, const Vector3* p_1, const Vector3* T_1, FLOAT time);
+Vector3* myD3DXVec3CatmullRom(Vector3* pOut, const Vector3* p_0, const Vector3* p_1, const Vector3* p_2, const Vector3* p_3, FLOAT time);
+Vector3* myD3DXVec3KochanekBartels(Vector3* pOut, const Vector3* p_0, const Vector3* p_1, const Vector3* p_2, const Vector3* p_3, 
+	const FLOAT t, const FLOAT b, const FLOAT c, FLOAT time);
 // Vector3
 // 收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收 //
 // Matrix

@@ -5,9 +5,10 @@ USING(Tipp7)
 
 void RM::preLoadTextures()
 {
-	CreateShader(L"Shaders/PhongUV.fx", "PhongUV");
-	CreateShader(L"Shaders/Light.fx", "Light");
-	CreateShader(L"Shaders/MyLightShader.fx", "MLS");
+	CreateShader(L"Shaders/PhongUV.fx", "Shader_PhongUV");
+	CreateShader(L"Shaders/Light.fx", "Shader_Light");
+	CreateShader(L"Shaders/MyLightShader.fx", "Shader_MLS");
+	CreateShader(L"Shaders/NormalMapping_Directional.fx", "Shader_NormalMap-Dir");
 
 	CreateTexture(L"Textures/terrain.png", "terrain");
 	CreateTexture(L"Textures/brick0.jpg", "brick0");
@@ -16,6 +17,14 @@ void RM::preLoadTextures()
 	CreateTexture(L"Textures/red.png", "red");
 	CreateTexture(L"Textures/orange.png", "orange");
 	CreateTexture(L"Colors/FA59AMako_BaseColor.png", "Air");
+
+	CreateTexture(L"Textures/Earth.jpg", "Earth");
+	CreateTexture(L"Textures/fieldstone_DM.tga", "stoneDM");
+	CreateTexture(L"Textures/fieldstone_SM.tga", "stoneSM");
+	CreateTexture(L"Textures/fieldstone_NM.tga", "stoneNM");
+
+	CreateTexture(L"Textures/Normal_None.png", "NoneNM");
+	CreateTexture(L"Textures/Specular_None.png", "NoneSM");
 }
 
 HRESULT RM::CreateTexture(wstring _path, string _resName)
@@ -33,7 +42,7 @@ HRESULT RM::CreateTexture(wstring _path, string _resName)
 	auto route = L"res/" + _path;
 
 	auto isFail = D3DXCreateTextureFromFileExW(DEVICE, route.c_str(), -2, -2, 1, 0, D3DFORMAT::D3DFMT_A8B8G8R8, 
-		D3DPOOL::D3DPOOL_MANAGED, D3DX_FILTER_NONE, D3DX_FILTER_NONE, 0, &tex->info, nullptr,
+		D3DPOOL::D3DPOOL_MANAGED, D3DX_FILTER_LINEAR, D3DX_FILTER_LINEAR, 0, &tex->info, nullptr,
 		&tex->texture);
 
 	if (FAILED(isFail)) {

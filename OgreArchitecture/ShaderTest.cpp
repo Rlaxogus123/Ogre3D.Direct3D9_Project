@@ -19,29 +19,30 @@ void ShaderTest::Init()
 
     Tipp7::SceneNode* n_airship = this->createChildSceneNode("model0");
     Tipp7::Entity* entity = this->createEntity("AirEntity", L"Models/SphereModel.x");
-    entity->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("red")));
+    entity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("Shader_NormalMap-Dir")));
+    entity->SetDiffuseMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("stoneDM")));
+    entity->SetNormalMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("NoneNM")));
+    entity->SetSpecularMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("stoneSM")));
+
     n_airship->attachObject(entity);
-    n_airship->setScale(0.05f, 0.05f, 0.05f);
-    n_airship->setPosition(0, -10, 0);
+    n_airship->setScale(0.5, 0.5, 0.5);
+    n_airship->setPosition(0, 30, 0);
 
     MeshManager::GetInstance()->createPlane(
         "ground",
-        400, 400, 10, 10,
-        7, 7
+        4000, 4000, 10, 10,
+        70, 70
     );
 
     Tipp7::SceneNode* n_ground = this->createChildSceneNode("Ground");
     Tipp7::Entity* groundEntity = this->createEntity("GroundEntity", "ground");
-    groundEntity->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("brick1")));
+    groundEntity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("Shader_NormalMap-Dir")));
+    groundEntity->SetDiffuseMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("stoneDM")));
+    groundEntity->SetNormalMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("stoneNM")));
+    groundEntity->SetSpecularMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("stoneSM")));
+
     n_ground->attachObject(groundEntity);
     n_ground->setPosition(0, -10, 0);
-
-    //Tipp7::SceneNode* n_park = this->createChildSceneNode("ParkDongWan");
-    //Tipp7::Entity* entity_park = this->createEntity("entity_park", L"Models/SphereModel.x");
-    //entity_park->SetEffect(L"Shaders/MyFirstShader.fx");
-    //n_park->attachObject(entity_park);
-    //n_park->setPosition(-20, -10, 10);
-    //n_park->setScale(5, 5, 5);
 }
 
 void ShaderTest::Update()

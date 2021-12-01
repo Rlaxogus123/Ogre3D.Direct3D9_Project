@@ -19,8 +19,15 @@ public:
 	Texture2D* MeshTextures = NULL; // 메쉬 텍스쳐
 	DWORD numMaterials = NULL; // 재질의 수
 
+	LPDIRECT3DTEXTURE9 Specular_texture = nullptr;
+	LPDIRECT3DTEXTURE9 Normal_texture = nullptr;
+	LPDIRECT3DTEXTURE9 Diffuse_texture = nullptr;
+
 	HRESULT SetXFile(wstring _xfilePath);
 	void SetTexture(Texture2D* texture, const int _number = 0);
+	void SetSpecularMap(Texture2D* texture);
+	void SetNormalMap(Texture2D* texture);
+	void SetDiffuseMap(Texture2D* texture);
 	void SetEffect(Shader* _shader);
 
 	void Init(void) override;

@@ -14,13 +14,22 @@ void Shader::Render(const D3DXMATRIX& _matWorld)
 {
 	D3DXMATRIX matView;
 	D3DXMATRIX matProj;
+	D3DXMATRIX matWorld;
 
 	DEVICE->GetTransform(D3DTS_VIEW, &matView);
 	DEVICE->GetTransform(D3DTS_PROJECTION, &matProj);
+	DEVICE->GetTransform(D3DTS_WORLD, &matWorld);
 
-	effect->SetMatrix((D3DXHANDLE)"gWorldMatrix", &_matWorld);
-	effect->SetMatrix((D3DXHANDLE)"gViewMatrix", &matView);
-	effect->SetMatrix((D3DXHANDLE)"gProjectionMatrix", &matProj);
+	D3DXMATRIX matWorldView = *D3DXMatrixMultiply(&matWorldView, &matWorld, &matView);
+	D3DXMATRIX matWorldViewProj = *D3DXMatrixMultiply(&matWorldViewProj, &matWorldView, &matProj);
+
+	effect->SetMatrix((D3DXHANDLE)"gWorldMatrix", &matWorld);
+	effect->SetMatrix((D3DXHANDLE)"gWorldViewProjMatrix", &matWorldViewProj);
+
+	D3DXMATRIX invView = *D3DXMatrixInverse(&invView, NULL, &matView);
+	Vector4 camPos = Vector4(invView._41, invView._42, invView._43, 1);	
+
+	effect->SetVector((D3DXHANDLE)"gCameraPosition", &camPos);
 }
 
 Resources* Shader::Clone(void)

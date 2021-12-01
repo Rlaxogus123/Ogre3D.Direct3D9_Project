@@ -13,6 +13,7 @@ Font2D::Font2D()
 
 Font2D::Font2D(LPCWSTR path, float scale, float weight, Vector2 pos, Color co)
 {
+	memset(buff, '\0', sizeof(buff));
 	position = Vector3(pos.x, pos.y, 0);
 	color = co;
 	D3DXCreateFont(DXUTGetD3D9Device(), 20 * scale, 0, weight, 1, 0, 1, 0, 0, 0 | FF_DONTCARE, path, &font);

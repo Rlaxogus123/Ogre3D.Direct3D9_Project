@@ -1030,7 +1030,7 @@ Pass 0]]></RmTextDataBlock></RmStringVariable>
     </RmRegistryBranch>
     <RmRegistryBranch NAME="WORKSPACE" API="" XML_VERSION="RenderMonkey 1.71">
      <RmStringVariable NAME="LAST_SAVE" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC=""><RmTextDataBlock TYPE="TEXT"><![CDATA[
-4/11/2021 15:18:21]]></RmTextDataBlock></RmStringVariable>
+29/11/2021 21:46:48]]></RmTextDataBlock></RmStringVariable>
      <RmStringVariable NAME="VERSION" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC=""><RmTextDataBlock TYPE="TEXT"><![CDATA[
 RenderMonkey Version 1.82 (build 322)]]></RmTextDataBlock></RmStringVariable>
      <RmStringVariable NAME="XML_VERSION" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC=""><RmTextDataBlock TYPE="TEXT"><![CDATA[
@@ -1050,8 +1050,8 @@ D:\DirectXSamples\Ogre3D.Direct3D9_Project\OgreArchitecture\res\Shaders\]]></RmT
     </RmDynamicVariableValueContainer>
    </RmDynamicVariable>
    <RmVectorVariable NAME="gWorldLightPosition" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC="" VALUE_0="500.000000" VALUE_1="500.000000" VALUE_2="-500.000000" VALUE_3="1.000000" MIN="-10.000000" MAX="10.000000" CLAMP="FALSE" NORMALIZE="FALSE"/>
-   <RmVectorVariable NAME="gCameraPosition" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC="ViewPosition" VALUE_0="54.585434" VALUE_1="-6.326133" VALUE_2="174.246826" VALUE_3="1.000000" MIN="-10.000000" MAX="10.000000" CLAMP="FALSE" NORMALIZE="FALSE"/>
-   <RmMatrixVariable NAME="gWorldViewProjMatrix" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC="WorldViewProjection" VALUE_0="-2.013495" VALUE_1="0.368896" VALUE_2="0.644151" VALUE_3="0.000000" VALUE_4="0.420879" VALUE_5="2.376807" VALUE_6="-0.045572" VALUE_7="0.002940" VALUE_8="-0.299060" VALUE_9="0.034659" VALUE_10="-0.954654" VALUE_11="181.888046" VALUE_12="-0.298761" VALUE_13="0.034625" VALUE_14="-0.953700" VALUE_15="182.706161"/>
+   <RmVectorVariable NAME="gCameraPosition" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC="ViewPosition" VALUE_0="2.929084" VALUE_1="-55.468761" VALUE_2="192.131577" VALUE_3="1.000000" MIN="-10.000000" MAX="10.000000" CLAMP="FALSE" NORMALIZE="FALSE"/>
+   <RmMatrixVariable NAME="gWorldViewProjMatrix" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC="WorldViewProjection" VALUE_0="-2.075576" VALUE_1="0.514489" VALUE_2="0.180176" VALUE_3="0.000000" VALUE_4="0.612247" VALUE_5="2.246131" VALUE_6="0.639121" VALUE_7="0.001400" VALUE_8="-0.014660" VALUE_9="0.277622" VALUE_10="-0.961621" VALUE_11="199.198975" VALUE_12="-0.014645" VALUE_13="0.277344" VALUE_14="-0.960659" VALUE_15="199.999786"/>
    <Rm2DTextureVariable NAME="fieldstone_SM" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC="" FILE_NAME="C:\Users\Tipp7\Desktop\ShaderPrimerKR-master\05_DiffuseSpecularMapping\fieldstone_SM.tga" ORIGIN="0"/>
    <Rm2DTextureVariable NAME="NormalMap" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC="" FILE_NAME="C:\Program Files (x86)\AMD\RenderMonkey 1.82\Examples\Media\Textures\FieldstoneBumpDOT3.tga" ORIGIN="0"/>
    <Rm2DTextureVariable NAME="DiffuseMap" API="" ARTIST_EDITABLE="FALSE" VARIABLE_SEMANTIC="" FILE_NAME="C:\Program Files (x86)\AMD\RenderMonkey 1.82\Examples\Media\Textures\Fieldstone.tga" ORIGIN="0"/>
@@ -1178,8 +1178,6 @@ float4 ps_main ( PS_INPUT Input ) : COLOR
    //return float4(environment, 1);
 };]]></RmShaderCode>
      <RmSampler NAME="DiffuseSampler" API="" REGISTER="0"/>
-     <RmSampler NAME="EnvironmentSampler" API="" REGISTER="3"/>
-     <RmSampler NAME="NormalSampler" API="" REGISTER="2"/>
      <RmSampler NAME="SpecularSampler" API="" REGISTER="1"/>
      <RmShaderConstant NAME="gLightColor" API="" REGISTER="0"/>
     </RmHLSLShader>
