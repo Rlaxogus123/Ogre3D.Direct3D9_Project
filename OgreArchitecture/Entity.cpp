@@ -98,7 +98,7 @@ void Entity::Render(void)
 		shader->effect->SetVector((D3DXHANDLE)"gWorldLightPosition", &Vector4(0, -1, 0, 0));
 
 		shader->effect->SetVector((D3DXHANDLE)"gLightColor", &Vector4(1,1,1,1));
-		shader->effect->SetVector((D3DXHANDLE)"gLightAmbient", &Vector4(0.1,0.1,0.1,1));
+		shader->effect->SetVector((D3DXHANDLE)"gLightAmbient", &Vector4(0.5,0.5,0.5,1));
 
 		shader->effect->SetTexture((D3DXHANDLE)"DiffuseMap_Tex", Diffuse_texture);
 		shader->effect->SetTexture((D3DXHANDLE)"fieldstone_SM_Tex", Specular_texture);

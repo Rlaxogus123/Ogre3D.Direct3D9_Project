@@ -19,7 +19,10 @@ void Test2App::Init()
 
     Tipp7::SceneNode* n_airship = this->createChildSceneNode("model0");
     Tipp7::Entity* entity = this->createEntity("AirEntity", L"Models/SphereModel.x");
-    entity->SetTexture(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("red")));
+    entity->SetEffect(dynamic_cast<Shader*>(RM::GetInstance()->GetResources("Shader_NormalMap-Dir")));
+    entity->SetDiffuseMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("stoneDM")));
+    entity->SetNormalMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("stoneNM")));
+    entity->SetSpecularMap(dynamic_cast<Texture2D*>(RM::GetInstance()->GetResources("stoneSM")));
     n_airship->attachObject(entity);
     n_airship->setScale(0.05f, 0.05f, 0.05f);
     n_airship->setPosition(0, -10, 0);
@@ -63,7 +66,7 @@ void Test2App::Update()
     }
 
     char buff[255];
-    sprintf(buff, "T(tight) : %.2f", float_t);
+    sprintf(buff, "T(tension) : %.2f", float_t);
     font_t->SetString(buff);
     sprintf(buff, "B(bias)  : %.2f", float_b);
     font_b->SetString(buff);
