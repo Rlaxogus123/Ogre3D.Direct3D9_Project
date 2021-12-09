@@ -48,6 +48,16 @@ void SquadApp::Init()
     CreatePoint();
     CreatePoint();
 
+    D3DXQUATERNION q0;
+    q0.w = 1;
+    q0.x = 2;
+    q0.y = 3;
+    q0.z = 4;
+
+    D3DXQUATERNION q2;
+    MyMath::__ShowQuaternion(MyMath::__QuaternionPow(&q2, &q0, 1), "Multiply");
+    MyMath::__ShowQuaternion(D3DXQuaternionExp(&q2, &q0), "Multiply");
+
     font0 = new Font2D(L"Arial", 2, 700, Vector2(20, 20));
     font1 = new Font2D(L"Arial", 2, 700, Vector2(20, 75));
 }
@@ -80,17 +90,17 @@ void SquadApp::Update()
     }
     if (moveType == SHOWCASE::LERP) {
         movable = "Lerp";
-        node->setPosition(*D3DXVec3Lerp(&node->position, &catmull_list[1 + circle], &catmull_list[2 + circle], time));
+        node->setPosition(*MyMath::myD3DXVec3Lerp(&node->position, &catmull_list[1 + circle], &catmull_list[2 + circle], time));
     }
     
     if (rotateType == SHOWCASE::SLERP) {
         rotate = "SLerp";
-        Q = *D3DXQuaternionSlerp(&Q, &quaternion_list[1 + circle], &quaternion_list[2 + circle], time);
+        Q = *MyMath::myD3DXQuaternionSlerp(&Q, &quaternion_list[1 + circle], &quaternion_list[2 + circle], time);
     }
     if (rotateType == SHOWCASE::SQUAD) {
         rotate = "Squad";
         SettingSquad();
-        Q = *D3DXQuaternionSquad(&Q, &quaternion_list[1 + circle], &s0, &s1, &quaternion_list[2 + circle], time);
+        Q = *MyMath::myD3DXQuaternionSquad(&Q, &quaternion_list[1 + circle], &s0, &s1, &quaternion_list[2 + circle], time);
         // setup quaternion is always normal; s0.length == 1;
         //cout << "s_0 length = " << D3DXQuaternionLength(&s0) << endl;
     }
@@ -157,5 +167,5 @@ void SquadApp::CreatePoint()
 void SquadApp::SettingSquad()
 {
     D3DXQUATERNION temp;
-    D3DXQuaternionSquadSetup(&s0, &s1, &temp, &quaternion_list[0 + circle], &quaternion_list[1 + circle], &quaternion_list[2 + circle], &quaternion_list[3 + circle]);
+    MyMath::myD3DXQuaternionSquadSetup(&s0, &s1, &quaternion_list[0 + circle], &quaternion_list[1 + circle], &quaternion_list[2 + circle], &quaternion_list[3 + circle]);
 }

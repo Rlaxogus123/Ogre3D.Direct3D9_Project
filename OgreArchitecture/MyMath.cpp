@@ -367,10 +367,38 @@ D3DXQUATERNION* myD3DXQuaternionConjugate(D3DXQUATERNION* pOut, const D3DXQUATER
 D3DXQUATERNION* myD3DXQuaternionSlerp(D3DXQUATERNION* pOut, const D3DXQUATERNION* q0, const D3DXQUATERNION* q1, const FLOAT time)
 {
 	D3DXQUATERNION invQ0 = *myD3DXQuaternionInverse(&invQ0, q0);
-	D3DXQUATERNION productQ = invQ0 * *q0;
-	D3DXQUATERNION powQ; //= __QuaternionPow(&powQ, productQ, time);
+	D3DXQUATERNION productQ = invQ0 * *q1;
+	D3DXQUATERNION powQ = *__QuaternionPow(&powQ, &productQ, time);
 	*pOut = *q0 * powQ;
 	return pOut;
+}
+
+D3DXQUATERNION* myD3DXQuaternionSquad(D3DXQUATERNION* pOut, const D3DXQUATERNION* q0, const D3DXQUATERNION* s0, const D3DXQUATERNION* s1, const D3DXQUATERNION* q1, FLOAT time)
+{
+	D3DXQUATERNION _first = *D3DXQuaternionSlerp(&_first, q0, q1, time);
+	D3DXQUATERNION _second = *D3DXQuaternionSlerp(&_second, s0, s1, time);
+	FLOAT _t = 2 * time * (1 - time);
+	
+	return D3DXQuaternionSlerp(pOut, &_first, &_second, _t);
+}
+
+VOID myD3DXQuaternionSquadSetup(D3DXQUATERNION* s0, D3DXQUATERNION* s1, const D3DXQUATERNION* q0, const D3DXQUATERNION* q1, const D3DXQUATERNION* q2, const D3DXQUATERNION* q3)
+{
+	D3DXQUATERNION _q0 = *myD3DXQuaternionConjugate(&_q0, q0);
+	D3DXQUATERNION _q1 = *myD3DXQuaternionConjugate(&_q1, q1);
+	D3DXQUATERNION _q2 = *myD3DXQuaternionConjugate(&_q2, q2);
+
+	D3DXQUATERNION log0_0 = *myD3DXQuaternionLn(&log0_0, &(_q0 * *q1));
+	D3DXQUATERNION log0_1 = *myD3DXQuaternionLn(&log0_1, &(_q1 * *q2));
+	D3DXQUATERNION exp0 = *myD3DXQuaternionExp(&exp0, &((log0_0 - log0_1) * 0.25f));
+	myD3DXQuaternionMultiply(s0, q1, &exp0);
+
+	D3DXQUATERNION log1_0 = *myD3DXQuaternionLn(&log1_0, &(_q1 * *q2));
+	D3DXQUATERNION log1_1 = *myD3DXQuaternionLn(&log1_1, &(_q2 * *q3));
+	D3DXQUATERNION exp1 = *myD3DXQuaternionExp(&exp1, &((log1_0 - log1_1) * 0.25f));
+	myD3DXQuaternionMultiply(s1, q2, &exp1);
+
+	return VOID();
 }
 
 D3DXQUATERNION* myD3DXQuaternionNormalize(D3DXQUATERNION* pOut, const D3DXQUATERNION* q)
@@ -388,7 +416,7 @@ D3DXQUATERNION* myD3DXQuaternionMultiply(D3DXQUATERNION* pOut, const D3DXQUATERN
 	Vector3 v2(q2->x, q2->y, q2->z);
 
 	FLOAT fs(s1 * s2 - (myD3DXVec3Dot(&v1, &v2)));
-	Vector3 fv((s1 * v2) + (s2 * v1) + myD3DXVec3Cross(&v1, &v2));
+	Vector3 fv((s1 * v2) + (s2 * v1) + myD3DXVec3Cross(&v2, &v1));
 	pOut->w = fs;
 	pOut->x = fv.x;
 	pOut->y = fv.y;
@@ -410,15 +438,16 @@ D3DXQUATERNION* myD3DXQuaternionInverse(D3DXQUATERNION* pOut, const D3DXQUATERNI
 
 D3DXQUATERNION* myD3DXQuaternionExp(D3DXQUATERNION* pOut, const D3DXQUATERNION* q)
 {
-	Vector3 v(pOut->x, pOut->y, pOut->z);
+	Vector3 v(q->x, q->y, q->z);
 
-	FLOAT _v = myD3DXVec3Length(&v);
-	Vector3 n = sinf(_v) * *myD3DXVec3Normalize(&n, &v);
-
-	pOut->w = cosf(_v);
-	pOut->x = n.x;
-	pOut->y = n.y;
-	pOut->z = n.z;
+	FLOAT _v = cosf(myD3DXVec3Length(&v));
+	FLOAT _s = sinf(myD3DXVec3Length(&v));
+	Vector3 n = *myD3DXVec3Normalize(&n, &v);
+	
+	pOut->w = exp(q->w) * _v;
+	pOut->x = exp(q->w) * _s * n.x;
+	pOut->y = exp(q->w) * _s * n.y;
+	pOut->z = exp(q->w) * _s * n.z;
 	return pOut;
 }
 
@@ -426,21 +455,21 @@ D3DXQUATERNION* myD3DXQuaternionLn(D3DXQUATERNION* pOut, const D3DXQUATERNION* q
 {
 	// log(g) = log(|g|)+acosf(s/|g|)*n
 	// n = v / ||v||
-	FLOAT _q = myD3DXQuaternionLength(q);
-	Vector3 n = *myD3DXVec3Normalize(&n, &Vector3(q->x, q->y, q->z));
+	Vector3 norm = *myD3DXVec3Normalize(&norm, &Vector3(q->x, q->y, q->z));
+	Vector3 _v = acosf(q->w / myD3DXQuaternionLength(q)) * norm;
 
-	pOut->w = log(_q);
-	pOut->x = acosf(pOut->w / _q) * n.x;
-	pOut->y = acosf(pOut->w / _q) * n.y;
-	pOut->z = acosf(pOut->w / _q) * n.z;
+	pOut->w = log(myD3DXQuaternionLength(q));
+	pOut->x = _v.x;
+	pOut->y = _v.y;
+	pOut->z = _v.z;
 
 	return pOut;
 }
 
 D3DXQUATERNION* __QuaternionPow(D3DXQUATERNION* pOut, const D3DXQUATERNION* q, const FLOAT r)
 {
-
-	return nullptr;
+	D3DXQUATERNION Ln = *myD3DXQuaternionLn(&Ln, q);
+	return myD3DXQuaternionExp(pOut, &(r * Ln));
 }
 
 FLOAT myD3DXQuaternionLengthSq(const D3DXQUATERNION* q)
