@@ -2,7 +2,6 @@
 
 NAMESPACE(MyMath)
 
-FLOAT mysqrt(const FLOAT amount);
 FLOAT myFloatLerp(FLOAT* pOut, const FLOAT* a1, const FLOAT* a2, const FLOAT amount);
 // 收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收收 //
 // Vector2

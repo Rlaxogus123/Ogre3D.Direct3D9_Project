@@ -152,18 +152,18 @@ void ProjectileApp::Update()
     {
         MyMath::myProjectileMotion(&n_effect[i]->position, &firstPos, &angleVector, i * 0.2f);
     }
-    float centerX = ((pow(v, 2) * sin(vAngle) * cos(vAngle)) / 9.807f);
-    float centerY = ((pow(v, 2) * pow(sin(vAngle), 2)) / (2 * 9.807f));
-
-    float finalPivot = pow(centerX, 2) / (4 * centerY);
-    center->position.x = firstPos.x + centerX;
-    center->position.y = firstPos.y + centerY - finalPivot;
-    center->position.z = firstPos.z;
-
-    pivot->position.x = firstPos.x + centerX;
-    pivot->position.y = firstPos.y + centerY - finalPivot;
-    pivot->position.z = firstPos.z;
-    pivot->setBoundCircle(finalPivot);
+    //float centerX = ((pow(v, 2) * sin(vAngle) * cos(vAngle)) / 9.807f);
+    //float centerY = ((pow(v, 2) * pow(sin(vAngle), 2)) / (2 * 9.807f));
+    //
+    //float finalPivot = pow(centerX, 2) / (4 * centerY);
+    //center->position.x = firstPos.x + centerX;
+    //center->position.y = firstPos.y + centerY - finalPivot;
+    //center->position.z = firstPos.z;
+    //
+    //pivot->position.x = firstPos.x + centerX;
+    //pivot->position.y = firstPos.y + centerY - finalPivot;
+    //pivot->position.z = firstPos.z;
+    //pivot->setBoundCircle(finalPivot);
 
 
     if (DXUTIsKeyDown('W')) cam->setTranslate(cam->foward);

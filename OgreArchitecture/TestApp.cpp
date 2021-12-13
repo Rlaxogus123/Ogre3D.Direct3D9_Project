@@ -124,8 +124,12 @@ void TestApp::Update()
    angle += Time::deltaTime * 30;
 
    //D3DXQUATERNION* qq = new D3DXQUATERNION();
-   D3DXQUATERNION Q = *D3DXQuaternionRotationAxis(&Q, &Vector3(1, 1, 0), D3DXToRadian(angle));
-   D3DXMatrixRotationQuaternion(model->matQuaternion, &Q);
+   D3DXQUATERNION Q = *MyMath::myD3DXQuaternionRotationAxis(&Q, &Vector3(1, 1, 0), D3DXToRadian(angle));
+   
+   if (isMy) D3DXMatrixRotationQuaternion(model->matQuaternion, &Q);
+   else MyMath::myD3DXMatrixRotationQuaternion(model->matQuaternion, &Q);
+   if (DXUTWasKeyPressed('Z'))
+       isMy = !isMy;
    //model->quaternion = qq;
    //model
 

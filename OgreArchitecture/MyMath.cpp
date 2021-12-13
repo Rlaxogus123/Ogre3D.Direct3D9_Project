@@ -9,11 +9,6 @@
 //式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式//
 NAMESPACE(MyMath)
 
-FLOAT mysqrt(const FLOAT amount)
-{
-	return FLOAT();
-}
-
 FLOAT myFloatLerp(FLOAT* pOut, const FLOAT* a1, const FLOAT* a2, const FLOAT amount)
 {
 	// out = start + (end - start) * time;
@@ -306,17 +301,17 @@ D3DXMATRIX* myD3DXMatrixRotationQuaternion(D3DXMATRIX* pOut, const D3DXQUATERNIO
 	FLOAT w = q->w;
 
 	pOut->_11 = 1 - (2 * y * y) - (2 * z * z);
-	pOut->_12 = (2 * x * y) - (2 * w * z);
-	pOut->_13 = (2 * x * z) + (2 * w * y);
+	pOut->_12 = (2 * x * y) + (2 * w * z);
+	pOut->_13 = (2 * x * z) - (2 * w * y);
 	pOut->_14 = 0;
 
-	pOut->_21 = (2 * x * y) + (2 * w * z);
+	pOut->_21 = (2 * x * y) - (2 * w * z);
 	pOut->_22 = 1 - (2 * x * x) - (2 * z * z);
-	pOut->_23 = (2 * y * z) - (2 * w * x);
+	pOut->_23 = (2 * y * z) + (2 * w * x);
 	pOut->_24 = 0;
 
-	pOut->_31 = (2 * x * z) - (2 * w * y);
-	pOut->_32 = (2 * y * z) + (2 * w * x);
+	pOut->_31 = (2 * x * z) + (2 * w * y);
+	pOut->_32 = (2 * y * z) - (2 * w * x);
 	pOut->_33 = 1 - (2 * x * x) - (2 * y * y);
 	pOut->_34 = 0;
 
@@ -366,6 +361,8 @@ D3DXQUATERNION* myD3DXQuaternionConjugate(D3DXQUATERNION* pOut, const D3DXQUATER
 
 D3DXQUATERNION* myD3DXQuaternionSlerp(D3DXQUATERNION* pOut, const D3DXQUATERNION* q0, const D3DXQUATERNION* q1, const FLOAT time)
 {
+	// Algebra Slerp.
+	// q(q* q)^t
 	D3DXQUATERNION invQ0 = *myD3DXQuaternionInverse(&invQ0, q0);
 	D3DXQUATERNION productQ = invQ0 * *q1;
 	D3DXQUATERNION powQ = *__QuaternionPow(&powQ, &productQ, time);
@@ -487,12 +484,12 @@ D3DXQUATERNION* __QuaternionRotationAxis(D3DXQUATERNION* pOut, const D3DXQUATERN
 	D3DXVECTOR3 y = *axis;
 	D3DXVECTOR3 v(q->x, q->y, q->z);
 
-	FLOAT angle = acosf(D3DXVec3Dot(&y, &v) / (D3DXVec3Length(&y) * D3DXVec3Length(&v)));
+	FLOAT angle = acosf(myD3DXVec3Dot(&y, &v) / (myD3DXVec3Length(&y) * myD3DXVec3Length(&v)));
 
 	D3DXVECTOR3 _axis;
-	D3DXVec3Cross(&_axis, &y, &v);
+	myD3DXVec3Cross(&_axis, &y, &v);
 
-	D3DXQuaternionRotationAxis(pOut, &_axis, angle);
+	myD3DXQuaternionRotationAxis(pOut, &_axis, angle);
 	return pOut;
 }
 

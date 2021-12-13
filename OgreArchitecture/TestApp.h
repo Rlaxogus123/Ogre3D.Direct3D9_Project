@@ -11,6 +11,8 @@ public:
 	explicit TestApp(void);
 	~TestApp(void) {};
 
+	bool isMy = false;
+
 	void Init() override;
 	void Update() override;
 	void Render() override;
