@@ -95,7 +95,7 @@ void Entity::Render(void)
 		shader->Render(node->GetMatrix());
 
 		// 쉐이더 전역변수들을 설정
-		shader->effect->SetVector((D3DXHANDLE)"gWorldLightPosition", &Vector4(0, -1, 0, 0));
+		shader->effect->SetVector((D3DXHANDLE)"gWorldLightPosition", &Vector4(5, -1, 0, 0));
 
 		shader->effect->SetVector((D3DXHANDLE)"gLightColor", &Vector4(1,1,1,1));
 		shader->effect->SetVector((D3DXHANDLE)"gLightAmbient", &Vector4(0.5,0.5,0.5,1));

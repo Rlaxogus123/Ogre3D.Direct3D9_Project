@@ -1,7 +1,8 @@
 #pragma once
 #include "SceneNode.h"
-#include "Entity.h"
+#include "AseHandler.h"
 #include "Camera.h"
+#include "Entity.h"
 #include "Light.h"
 #include "MeshManager.h"
 
@@ -12,6 +13,7 @@ class SceneManager
 private:
 	list<SceneNode*> nodelist;
 	list<MovableObject*> movableList;
+
 	list<Camera*> camList;
 	list<Light*> lightList;
 public:
@@ -30,6 +32,9 @@ public:
 
 	Camera* createCamera(const string _movableName);
 	Camera* getCamera(const string _movableName);
+
+	AseHandler* createAseHandler(const string _movableName, const wstring _path = L"");
+	AseHandler* getAseHandler(const string _movableName);
 
 	Entity* createEntity(const string _movableName, const wstring _xfilePath);
 	Entity* createEntity(const string _movableName, const string _planeName);

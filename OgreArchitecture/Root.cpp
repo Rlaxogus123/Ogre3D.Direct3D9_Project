@@ -99,12 +99,8 @@ void Root::RootRender(void)
 
 void Root::RootExit(void)
 {
+	curScene->Exit();
 	curScene = nullptr;
-	for (auto& it : sceneList)
-	{
-		it->Exit();
-		delete it;
-	}
 	sceneList.clear();
 	RM::GetInstance()->Exit();
 	exit(0);

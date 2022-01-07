@@ -1,0 +1,22 @@
+* GEOMOBJECT : 오브젝트의 기하 정보들이 들어있는 '블록'
+
+	* MESH : 메쉬를 구성하는 데이터들이 들어있는 '블록'
+
+		* MESH_NUMVERTEX : 버텍스 위치 데이터의 개수 ( 메쉬의 총 버텍스 수가 아님 )
+		* MESH_NUMFACES : 폴리곤을 구성하는 버텍스 위치 데이터의 인덱스 개수
+
+		* MESH_VERTEX_LIST : 버텍스의 위치데이터들이 들어있는 '블록'
+			*MESH_VERTEX : [버텍스의 위치데이터]
+
+		* MESH_FACE_LIST : 폴리곤을 구성하는 버텍스 위치 데이터의 인덱스 
+				   ( MESH_VERTEX와 매칭 ) 가 저장 되어 있는 블록
+			* MESH_FACE : [폴리곤을 구성하는 버텍스 위치 데이터의 인덱스]
+		
+		* MESH_NUMTVERTEX : 버텍스 텍스쳐 좌표 데이터의 개수
+		* MESH_TVERTLIST : 버텍스 텍스쳐 좌표 데이터가 저장 되어 있는 '블록'
+			* MESH_TVERT : [버텍스 텍스쳐 좌표 데이터] ( uv 좌표 )
+
+		* MESH_NUMTFACES : 폴리곤을 구성하는 버텍스 텍스쳐 좌표 데이터의 인덱스 개수
+		* MESH_TFACELIST : 폴리곤을 구성하는 버텍스 텍스쳐 좌표 데이터의 인덱스
+				   ( MESH_TVERT와 매칭 ) 가 저장 되어 있는 블록
+			* MESH_TFACE : [폴리곤을 구성하는 버텍스 텍스쳐 좌표 데이터의 인덱스]

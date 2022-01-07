@@ -16,16 +16,19 @@
 */
 #include "DXUT.h"
 #include "resource.h"
+
 #include "MyMath.h"
 #include "RM.h"
 #include "Time.h"
 #include "Root.h"
+
 #include "TestApp.h"
 #include "Test2App.h"
 #include "GameApp.h"
 #include "ProjectileApp.h"
 #include "SquadApp.h"
 #include "ShaderTest.h"
+#include "AseApp.h"
 
 
 USING(Tipp7)
@@ -56,10 +59,11 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
     srand(time(NULL));
     RM::GetInstance()->preLoadTextures();
     Tipp7::Root::GetInstance()->RootInit();
-    Root::GetInstance()->createSceneManager("TestApp", new TestApp());
-    Root::GetInstance()->createSceneManager("SquadApp", new SquadApp());
-    Root::GetInstance()->createSceneManager("Test2App", new Test2App());
+    Root::GetInstance()->createSceneManager("AseApp", new AseApp());
     Root::GetInstance()->createSceneManager("ShaderTest", new ShaderTest());
+    Root::GetInstance()->createSceneManager("SquadApp", new SquadApp());
+    Root::GetInstance()->createSceneManager("TestApp", new TestApp());
+    Root::GetInstance()->createSceneManager("Test2App", new Test2App());
     Root::GetInstance()->createSceneManager("GameApp", new GameApp());
     Root::GetInstance()->createSceneManager("ProjectileApp", new ProjectileApp());
     return S_OK;

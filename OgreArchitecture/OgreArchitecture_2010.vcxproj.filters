@@ -105,7 +105,16 @@
     <Filter Include="2Game\0Scene\4SquadApp">
       <UniqueIdentifier>{0376bebb-660b-407b-b3ff-d5b86675e68e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2Game\0Scene\ShaderTest">
+    <Filter Include="1Engine\4MovableObject\3AseHandler">
+      <UniqueIdentifier>{879877ab-870f-4158-98dd-e90bef1c35e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1Engine\4MovableObject\3AseHandler\Laxer &amp; Parser">
+      <UniqueIdentifier>{bda2bc02-f178-40cc-b7b3-383a8e6e7c9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game\0Scene\6AseApp">
+      <UniqueIdentifier>{9fa92a89-40d1-467d-a655-570acd0d7e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2Game\0Scene\5ShaderTest">
       <UniqueIdentifier>{4fa98c18-2ea8-44ab-a7f1-37da8cc1ee00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -249,7 +258,19 @@
       <Filter>2Game\0Scene\4SquadApp</Filter>
     </ClCompile>
     <ClCompile Include="ShaderTest.cpp">
-      <Filter>2Game\0Scene\ShaderTest</Filter>
+      <Filter>2Game\0Scene\5ShaderTest</Filter>
+    </ClCompile>
+    <ClCompile Include="AseHandler.cpp">
+      <Filter>1Engine\4MovableObject\3AseHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="AseParser.cpp">
+      <Filter>1Engine\4MovableObject\3AseHandler\Laxer &amp; Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="AseLexer.cpp">
+      <Filter>1Engine\4MovableObject\3AseHandler\Laxer &amp; Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="AseApp.cpp">
+      <Filter>2Game\0Scene\6AseApp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,7 +356,19 @@
       <Filter>2Game\0Scene\4SquadApp</Filter>
     </ClInclude>
     <ClInclude Include="ShaderTest.h">
-      <Filter>2Game\0Scene\ShaderTest</Filter>
+      <Filter>2Game\0Scene\5ShaderTest</Filter>
+    </ClInclude>
+    <ClInclude Include="AseHandler.h">
+      <Filter>1Engine\4MovableObject\3AseHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="AseParser.h">
+      <Filter>1Engine\4MovableObject\3AseHandler\Laxer &amp; Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="AseLexer.h">
+      <Filter>1Engine\4MovableObject\3AseHandler\Laxer &amp; Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="AseApp.h">
+      <Filter>2Game\0Scene\6AseApp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,0 +1,5 @@
+* MATERIAL_LIST : Material 정보들이 들어있는 '블록'
+
+	* MATERIAL_COUNT : Material의 개수를 나타냄
+	* MAP_DIFFUSE : Material 중 Diffuse 정보들이 들어있는 '블록'
+		* BITMAP : Diffuse 텍스쳐의 경로와 이름이 들어있다.

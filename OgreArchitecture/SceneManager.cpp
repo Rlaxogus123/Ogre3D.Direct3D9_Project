@@ -77,6 +77,31 @@ Camera* SceneManager::getCamera(const string _movableName)
 			return it;
 }
 
+AseHandler* SceneManager::createAseHandler(const string _movableName, const wstring _path)
+{
+	AseHandler* movable = new AseHandler();
+	movable->movableName = _movableName;
+	for (auto& it : movableList)
+	{
+		if (it->movableName._Equal(_movableName))
+		{
+			cout << "This AseHandler name is Already added : " << _movableName << endl;
+			movable->movableName = it->movableName + "_copy";
+			break;
+		}
+	}
+	movableList.push_back(movable);
+	if (_path != L"") movable->SetAseFile(_path);
+	return movable;
+}
+
+AseHandler* SceneManager::getAseHandler(const string _movableName)
+{
+	for (auto& it : movableList)
+		if (it->movableName._Equal(_movableName))
+			return (AseHandler*)it;
+}
+
 Entity* SceneManager::createEntity(const string _movableName, const wstring _xfilePath)
 {
 	Entity* movable = new Entity();
@@ -110,7 +135,6 @@ Entity* SceneManager::createEntity(const string _movableName, const string _plan
 	}
 	movableList.push_back(movable);
 	movable->Mesh = MeshManager::GetInstance()->GetMesh(_planeName);
-	printf("%p", movable->Mesh);
 	movable->numMaterials = 1;
 	return movable;
 }
@@ -211,8 +235,6 @@ void SceneManager::Render(void)
 
 void SceneManager::Exit(void)
 {
-	cout << "!! SceneManager Released !! : " << sceneName << endl;
-
 	FontRenderer::GetInstance()->Exit();
 
 	for (auto& i : nodelist)
@@ -229,4 +251,6 @@ void SceneManager::Exit(void)
 	movableList.clear();
 	camList.clear();
 	lightList.clear();
+
+	cout << "!! SceneManager Released !! : " << sceneName << endl;
 }

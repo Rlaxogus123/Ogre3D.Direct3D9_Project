@@ -63,12 +63,6 @@ void GameApp::Update()
     SceneNode* character = this->getSceneNode("Character");
     SceneNode* cam = character->GetChild("MainCamera");
 
-    //if (CollisionManager::GetInstance()->Sphere_VS_Sphere(
-    //    model->getPosition(), model->boundCircle, character->getPosition(), character->boundCircle
-    //)) {
-    //    cout << "Collision Detective!" << endl;
-    //}
-
     if (DXUTIsKeyDown('W')) character->setTranslate(character->foward);
     if (DXUTIsKeyDown('S')) character->setTranslate(-character->foward);
     if (DXUTIsKeyDown('A')) character->setTranslate(-character->right);

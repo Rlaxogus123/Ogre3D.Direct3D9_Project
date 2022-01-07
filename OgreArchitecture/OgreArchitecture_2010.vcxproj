@@ -385,6 +385,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AseApp.cpp" />
+    <ClCompile Include="AseHandler.cpp" />
+    <ClCompile Include="AseLexer.cpp" />
+    <ClCompile Include="AseParser.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -411,6 +415,10 @@
     <ClCompile Include="TestApp.cpp" />
     <ClCompile Include="Texture2D.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClInclude Include="AseApp.h" />
+    <ClInclude Include="AseHandler.h" />
+    <ClInclude Include="AseLexer.h" />
+    <ClInclude Include="AseParser.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Entity.h" />

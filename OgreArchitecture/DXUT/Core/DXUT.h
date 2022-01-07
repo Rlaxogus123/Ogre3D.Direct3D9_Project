@@ -394,6 +394,13 @@ struct PLANEVERTEX {
 // D3DFVF_TEX0은 텍스쳐가 없다는 것을 말한다.
 // 따라서 텍스쳐가 있는 버텍스를 사용해야할 경우 TEX1부터 시작한다고 생각하면 된다.
 
+struct CUSTOMVERTEX {
+    D3DXVECTOR3 position;
+    D3DCOLOR color;
+    FLOAT tu, tv;
+};
+#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1)
+
 struct MYINDEX {
     WORD _0, _1, _2; // WORD, 16비트 인덱스
 };
